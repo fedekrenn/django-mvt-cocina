@@ -1,14 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-
-<body>
-  <h1>Fefo Cocinero!</h1>
-</body>
-
-</html>
+{% extends "aplicacion/index.html" %}
+{% block title %} Cocineros {% endblock %}
+{% block content %}
+<h1>Cocineros</h1>
+<table>
+    <thead>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Edad</th>
+        <th>Especialidad</th>
+    </thead>
+    <tbody>
+        {% for cocinero in cocineros %}
+        <tr>
+            <td>{{cocinero.nombre}}</td>
+            <td>{{cocinero.apellido}}</td>
+            <td>{{cocinero.edad}}</td>
+            <td>{{cocinero.especialidad}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

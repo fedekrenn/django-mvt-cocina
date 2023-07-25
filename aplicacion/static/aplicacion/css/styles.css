@@ -24,3 +24,7 @@ li {
 h1 {
   text-align: center;
 }
+
+td, th {
+  text-align: center;
+}

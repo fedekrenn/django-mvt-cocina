@@ -9,12 +9,15 @@ def index(request):
 
 
 def recetas(request):
-    return render(request, "aplicacion/recetas.html")
+    ctx = { "recetas": Receta.objects.all() }
+    return render(request, "aplicacion/recetas.html", ctx)
 
 
 def cocineros(request):
-    return render(request, "aplicacion/cocineros.html")
+    ctx = { "cocineros": Cocinero.objects.all() }
+    return render(request, "aplicacion/cocineros.html", ctx)
 
 
 def restaurantes(request):
-    return render(request, "aplicacion/restaurantes.html")
+    ctx = { "restaurantes": Restaurante.objects.all() }
+    return render(request, "aplicacion/restaurante.html", ctx)
