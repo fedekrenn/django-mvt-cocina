@@ -1,11 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>Fefo restaurante!</h1>
-</body>
-</html>
+{% extends "aplicacion/index.html" %}
+{% block title %} Restaurante {% endblock %}
+{% block content %}
+<h1>Restaurantes</h1>
+<table>
+    <thead>
+        <th>Nombre</th>
+        <th>Dirección</th>
+        <th>Teléfono</th>
+        <th>Categoría</th>
+    </thead>
+    <tbody>
+        {% for restaurante in restaurantes %}
+        <tr>
+            <td>{{restaurante.nombre}}</td>
+            <td>{{restaurante.direccion}}</td>
+            <td>{{restaurante.telefono}}</td>
+            <td>{{restaurante.categoria}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

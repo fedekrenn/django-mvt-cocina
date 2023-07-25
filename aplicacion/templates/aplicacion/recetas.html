@@ -1,11 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>Fefo recetas!</h1>
-</body>
-</html>
+{% extends "aplicacion/index.html" %}
+{% block title %} Recetas {% endblock %}
+{% block content %}
+<h1>Recetas</h1>
+<table>
+  <thead>
+    <th>Nombre</th>
+    <th>Ingredientes</th>
+    <th>Tiempo</th>
+    <th>Dificultad</th>
+  </thead>
+  <tbody>
+    {% for receta in recetas %}
+    <tr>
+      <td>{{receta.nombre}}</td>
+      <td>{{receta.ingredientes}}</td>
+      <td>{{receta.tiempo}}</td>
+      <td>{{receta.dificultad}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
