@@ -6,6 +6,16 @@ from .forms import RecetaForm, CocineroForm, RestauranteForm
 
 # Create your views here.
 def index(request):
+    if request.method == "POST":
+        nombre = request.POST["nombre"]
+        recetas = Receta.objects.filter(nombre__contains=nombre)
+        ctx = {"recetas": recetas}
+
+        if not recetas:
+            ctx = {"error": "No se encontraron recetas con ese nombre"}
+
+        return render(request, "aplicacion/index.html", ctx)
+
     return render(request, "aplicacion/index.html")
 
 
