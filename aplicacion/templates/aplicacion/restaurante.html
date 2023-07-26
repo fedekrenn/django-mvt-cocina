@@ -2,6 +2,17 @@
 {% block title %} Restaurante {% endblock %}
 {% block content %}
 <h1>Restaurantes</h1>
+<dialog id="dialog">
+    <form action="" method="POST" class="input-form">
+      {% csrf_token %}
+      {{ form }}
+      <div class="inline">
+        <button type="submit">Enviar</button>
+        <button id="close-dialog">Cerrar</button>
+      </div>
+    </form>
+  </dialog>
+  <button id="show-dialog">Agregar restaurante</button>
 <table>
     <thead>
         <th>Nombre</th>
