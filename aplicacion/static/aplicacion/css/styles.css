@@ -8,12 +8,20 @@ body {
   max-width: 100%;
 }
 
+nav {
+  min-height: 40vh;
+  background-image: url('../assets/header.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
 ul {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  margin: 1em 0 2em 0;
-  padding: 0;
+  padding: 1em 0 2em 0;
+  margin: 0;
   font-size: 1.5em;
 }
 
@@ -21,7 +29,24 @@ li {
   list-style: none;
 }
 
+a {
+  text-decoration: none;
+  color: #1a242f;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px #ffffff;
+}
+
 h1 {
+  color: #31414e;
+  text-shadow: 1px 1px 5px #ffffff;
+}
+
+h2 {
+  margin: 2em 0;
+}
+
+h1,
+h2 {
   text-align: center;
 }
 
@@ -37,7 +62,7 @@ th {
   font-style: italic;
 }
 
-.error{
+.error {
   color: red;
   text-align: center;
 }
@@ -47,7 +72,8 @@ th {
   margin: 2em auto;
 }
 
-.input-form, .search-form {
+.input-form,
+.search-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,6 +94,7 @@ th {
 }
 
 .card {
+  font-size: 16px;
   width: 200px;
   display: flex;
   flex-direction: column;
@@ -79,8 +106,22 @@ th {
   box-shadow: 0 0 5px #546574;
 }
 
+.card h3 {
+  color: #e1e2ec;
+  font-size: 1.2em;
+  margin: 0;
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+}
+
 .card span {
   color: #ffffff;
   font-weight: bold;
   text-decoration: underline;
+}
+
+.title-confirm {
+  text-align: center;
+  margin: 2em 0;
 }
