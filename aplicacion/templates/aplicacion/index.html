@@ -22,34 +22,34 @@
         <li><a href="{% url 'cocineros' %}">Cocineros</a></li>
         <li><a href="{% url 'restaurantes' %}">Restaurantes</a></li>
       </ul>
+      <h1>Cocinando ando - Ideas para tu cocina</h1>
     </nav>
-    <h1>Cocinando ando - Página para tu cocina</h1>
   </header>
   <main>
     <section>
       {% block content %}
-      <h1>Busqueda de recetas</h1>
-      <form action="" method="POST" class="search-form">
-        {% csrf_token %}
-        <input type="text" id="nombre" name="nombre" placeholder="Comida a buscar...">
-        <button type="submit">Buscar</button>
-      </form>
-      {% if error %}
-      <p class="error">{{error}}</p>
-      {% endif %}
-      {% for receta in recetas %}
-      <div class="card">
-        <div class="card-header">
-          <h2>{{receta.nombre}}</h2>
+      <h2>Busqueda de recetas</h>
+        <form action="" method="POST" class="search-form">
+          {% csrf_token %}
+          <input type="text" id="nombre" name="nombre" placeholder="Comida a buscar...">
+          <button type="submit">Buscar</button>
+        </form>
+        {% if error %}
+        <p class="error">{{error}}</p>
+        {% endif %}
+        {% for receta in recetas %}
+        <div class="card">
+          <div class="card-header">
+            <h3>{{receta.nombre}}</h3>
+          </div>
+          <div class="card-body">
+            <p><span>Ingredientes:</span> {{receta.ingredientes}}</p>
+            <p><span>Tiempo:</span> {{receta.tiempo}} minutos</p>
+            <p><span>Dificultad:</span> {{receta.dificultad}} / 3</p>
+          </div>
         </div>
-        <div class="card-body">
-          <p><span>Ingredientes:</span> {{receta.ingredientes}}</p>
-          <p><span>Tiempo:</span> {{receta.tiempo}} minutos</p>
-          <p><span>Dificultad:</span> {{receta.dificultad}} / 10</p>
-        </div>
-      </div>
-      {% endfor %}
-      {% endblock %}
+        {% endfor %}
+        {% endblock %}
     </section>
   </main>
   <script src="{% static 'aplicacion/js/main.js' %}"></script>
