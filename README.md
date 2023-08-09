@@ -16,7 +16,7 @@ Esta web permite a los usuarios consultar y crear recetas de cocina, cociner@s y
 
 Para instalar el proyecto se debe clonar el repositorio 
 ```
-git clone https://github.com/fedekrenn/Tercera-pre-entrega-Krenn.git
+git clone https://github.com/fedekrenn/Krenn-Federico-Comision-43865.git
 ```
 
 ## Uso

@@ -19,6 +19,7 @@
         <th>Dirección</th>
         <th>Teléfono</th>
         <th>Categoría</th>
+        <th>Eliminar</th>
     </thead>
     <tbody>
         {% for restaurante in restaurantes %}
@@ -27,6 +28,11 @@
             <td>{{restaurante.direccion}}</td>
             <td>{{restaurante.telefono}}</td>
             <td>{{restaurante.categoria}}</td>
+            <td>
+              <a href="{% url 'delete_restaurante' restaurante.id %}">
+                <i class="fa-regular fa-trash-can" style="color: #ffffff;" title="Eliminar restaurante"></i>
+              </a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>

@@ -35,13 +35,18 @@ def recetas(request):
                 dificultad=dificultad,
             )
 
-            return render(request, "aplicacion/confirmacion.html")
+            return render(request, "aplicacion/confirmacion-guardado.html")
     else:
         form = RecetaForm()
 
     ctx = {"recetas": Receta.objects.all(), "form": form}
 
     return render(request, "aplicacion/recetas.html", ctx)
+
+
+def delete_receta(request, id):
+    Receta.objects.get(id=id).delete()
+    return render(request, "aplicacion/confirmacion-eliminado.html")
 
 
 def cocineros(request):
@@ -57,12 +62,17 @@ def cocineros(request):
                 nombre=nombre, apellido=apellido, edad=edad, especialidad=especialidad
             )
 
-            return render(request, "aplicacion/confirmacion.html")
+            return render(request, "aplicacion/confirmacion-guardado.html")
     else:
         form = CocineroForm()
 
     ctx = {"cocineros": Cocinero.objects.all(), "form": form}
     return render(request, "aplicacion/cocineros.html", ctx)
+
+
+def delete_cocinero(request, id):
+    Cocinero.objects.get(id=id).delete()
+    return render(request, "aplicacion/confirmacion-eliminado.html")
 
 
 def restaurantes(request):
@@ -81,9 +91,14 @@ def restaurantes(request):
                 categoria=categoria,
             )
 
-            return render(request, "aplicacion/confirmacion.html")
+            return render(request, "aplicacion/confirmacion-guardado.html")
     else:
         form = RestauranteForm()
 
     ctx = {"restaurantes": Restaurante.objects.all(), "form": form}
     return render(request, "aplicacion/restaurante.html", ctx)
+
+
+def delete_restaurante(request, id):
+    Restaurante.objects.get(id=id).delete()
+    return render(request, "aplicacion/confirmacion-eliminado.html")

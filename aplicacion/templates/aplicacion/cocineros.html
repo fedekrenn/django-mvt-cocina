@@ -3,32 +3,38 @@
 {% block content %}
 <h2>Listado de Cocineros</h2>
 <dialog id="dialog">
-    <form action="" method="POST" class="input-form">
-      {% csrf_token %}
-      {{ form }}
-      <div class="inline">
-        <button type="submit">Enviar</button>
-        <button id="close-dialog">Cerrar</button>
-      </div>
-    </form>
-  </dialog>
-  <button id="show-dialog">Agregar cocinero</button>
+  <form action="" method="POST" class="input-form">
+    {% csrf_token %}
+    {{ form }}
+    <div class="inline">
+      <button type="submit">Enviar</button>
+      <button id="close-dialog">Cerrar</button>
+    </div>
+  </form>
+</dialog>
+<button id="show-dialog">Agregar cocinero</button>
 <table>
-    <thead>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Edad</th>
-        <th>Especialidad</th>
-    </thead>
-    <tbody>
-        {% for cocinero in cocineros %}
-        <tr>
-            <td>{{cocinero.nombre}}</td>
-            <td>{{cocinero.apellido}}</td>
-            <td>{{cocinero.edad}}</td>
-            <td>{{cocinero.especialidad}}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
+  <thead>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Edad</th>
+    <th>Especialidad</th>
+    <th>Eliminar</th>
+  </thead>
+  <tbody>
+    {% for cocinero in cocineros %}
+    <tr>
+      <td>{{cocinero.nombre}}</td>
+      <td>{{cocinero.apellido}}</td>
+      <td>{{cocinero.edad}}</td>
+      <td>{{cocinero.especialidad}}</td>
+      <td>
+        <a href="{% url 'delete_cocinero' cocinero.id %}">
+          <i class="fa-regular fa-trash-can" style="color: #ffffff;" title="Eliminar cocinero"></i>
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 {% endblock %}
