@@ -19,6 +19,7 @@
     <th>Ingredientes</th>
     <th>Tiempo</th>
     <th>Dificultad</th>
+    <th>Eliminar</th>
   </thead>
   <tbody>
     {% for receta in recetas %}
@@ -27,6 +28,11 @@
       <td>{{receta.ingredientes}}</td>
       <td>{{receta.tiempo}}</td>
       <td>{{receta.dificultad}}</td>
+      <td>
+        <a href="{% url 'delete_receta' receta.id %}">
+          <i class="fa-regular fa-trash-can" style="color: #ffffff;" title="Eliminar receta"></i>
+        </a>
+      </td>
     </tr>
     {% endfor %}
   </tbody>
