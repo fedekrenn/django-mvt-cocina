@@ -1,0 +1,42 @@
+{% extends "aplicacion/index.html" %}
+{% block title %} Acerca de mi {% endblock %}
+{% block content %}
+<section class="about">
+  <h2>Acerca de mi</h2>
+  <article>
+    <div class="about-me">
+      <div class="about-me__info">
+        <h3>¿Quién soy?</h3>
+        <p>Soy un estudiante de la Tecnicatura en desarrollo web y aplicaciones digitales en el ISPC, además estudio la
+          Tecnicatura en Software Libre en la UNL.</p>
+        <p>Comencé a estudiar desarrollo web en el 2021 en Coderhouse, finalicé con éxito la carrera de desarrollo web
+          fullstack y decidí realizar el curso de python ya que es una materia que tengo en ambas facultades y me ayuda
+          muchísimo a complementar.</p>
+        <div class="about-card">
+          <img src="../../static/aplicacion/assets/signature.png" alt="Firma">
+          <div>
+            <h4>Federico Krenn</h4>
+            <h5>Software Developer</h5>
+          </div>
+        </div>
+      </div>
+      <div class="about-me__img">
+        <img src="../../static/aplicacion/assets/profile.jpg" alt="Federico Krenn, software developer"
+          class="profile-img">
+      </div>
+    </div>
+    <ul>
+      <li>
+        <a href="https://www.linkedin.com/in/fkrenn/" target="_blank">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a href="http://github.com/fedekrenn" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+    </ul>
+  </article>
+</section>
+{% endblock %}

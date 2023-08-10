@@ -18,6 +18,10 @@ def index(request):
     return render(request, "aplicacion/index.html")
 
 
+def acerca_de_mi(request):
+    return render(request, "aplicacion/acerca-de-mi.html")
+
+
 def recetas(request):
     if request.method == "POST":
         form = RecetaForm(request.POST)
