@@ -19,7 +19,7 @@
     <th>Ingredientes</th>
     <th>Tiempo</th>
     <th>Dificultad</th>
-    <th>Eliminar</th>
+    <th>Acciones</th>
   </thead>
   <tbody>
     {% for receta in recetas %}
@@ -31,6 +31,9 @@
       <td>
         <a href="{% url 'delete_receta' receta.id %}">
           <i class="fa-regular fa-trash-can" style="color: #ffffff;" title="Eliminar receta"></i>
+        </a>
+        <a href="{% url 'edit_receta' receta.id %}">
+          <i class="fa-regular fa-edit" style="color: #ffffff;" title="Editar receta"></i>
         </a>
       </td>
     </tr>

@@ -1,0 +1,11 @@
+{% extends "aplicacion/index.html" %}
+{% block title %} Cocineros {% endblock %}
+{% block content %}
+<form action="" method="POST" class="input-form">
+  {% csrf_token %}
+  {{ form }}
+  <div class="inline">
+    <button type="submit">Actualizar</button>
+  </div>
+</form>
+{% endblock %}

@@ -9,4 +9,7 @@ urlpatterns = [
     path("eliminar-receta/<int:id>", delete_receta, name="delete_receta"),
     path("eliminar-cocinero/<int:id>", delete_cocinero, name="delete_cocinero"),
     path("eliminar-restaurante/<int:id>", delete_restaurante, name="delete_restaurante"),
+    path("editar-receta/<int:id>", edit_receta, name="edit_receta"),
+    path("editar-cocinero/<int:id>", edit_cocinero, name="edit_cocinero"),
+    path("editar-restaurante/<int:id>", edit_restaurante, name="edit_restaurante")
 ]
