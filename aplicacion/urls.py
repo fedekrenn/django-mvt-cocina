@@ -7,6 +7,7 @@ urlpatterns = [
     path("cocineros/", cocineros, name="cocineros"),
     path("restaurantes/", restaurantes, name="restaurantes"),
     path("proveedores/", proveedores, name="proveedores"),
+    path("acerca-de-mi/", acerca_de_mi, name="acerca_de_mi"),
     path("eliminar-receta/<int:id>", delete_receta, name="delete_receta"),
     path("eliminar-cocinero/<int:id>", delete_cocinero, name="delete_cocinero"),
     path("eliminar-restaurante/<int:id>", delete_restaurante, name="delete_restaurante"),
