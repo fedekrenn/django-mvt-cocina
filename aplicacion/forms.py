@@ -39,3 +39,21 @@ class RestauranteForm(forms.Form):
         ("Cena", "Cena"),
     )
     categoria = forms.ChoiceField(label="Categoría", choices=CATEGORIA, required=True)
+
+
+class ProveedorForm(forms.Form):
+    nombre = forms.CharField(label="Nombre del proveedor", max_length=50, required=True)
+    telefono = forms.CharField(
+        label="Teléfono del contacto", max_length=50, required=True
+    )
+    email = forms.CharField(label="Email", max_length=50, required=True)
+
+    PRODUCTO = (
+        ("Carnes", "Carnes"),
+        ("Verdura", "Verdura"),
+        ("Bebidas", "Bebidas"),
+        ("Pescado", "Pescado"),
+        ("Postres", "Postres"),
+        ("Pan", "Pan"),
+    )
+    producto = forms.ChoiceField(label="Producto", choices=PRODUCTO, required=True)
