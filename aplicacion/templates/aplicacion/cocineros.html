@@ -19,7 +19,7 @@
     <th>Apellido</th>
     <th>Edad</th>
     <th>Especialidad</th>
-    <th>Eliminar</th>
+    <th>Acciones</th>
   </thead>
   <tbody>
     {% for cocinero in cocineros %}
@@ -31,6 +31,9 @@
       <td>
         <a href="{% url 'delete_cocinero' cocinero.id %}">
           <i class="fa-regular fa-trash-can" style="color: #ffffff;" title="Eliminar cocinero"></i>
+        </a>
+        <a href="{% url 'edit_cocinero' cocinero.id %}">
+          <i class="fa-regular fa-edit" style="color: #ffffff;" title="Editar cocinero"></i>
         </a>
       </td>
     </tr>
