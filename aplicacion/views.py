@@ -1,7 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from .models import Receta, Cocinero, Restaurante
-from .forms import RecetaForm, CocineroForm, RestauranteForm
+from .models import Receta, Cocinero, Restaurante, Proveedor
+from .forms import RecetaForm, CocineroForm, RestauranteForm, ProveedorForm
 
 
 # Create your views here.
@@ -181,5 +180,58 @@ def edit_restaurante(request, id):
         )
 
     ctx = {"restaurantes": Restaurante.objects.all(), "form": form}
+
+    return render(request, "aplicacion/editar.html", ctx)
+
+
+def proveedores(request):
+    if request.method == "POST":
+        form = ProveedorForm(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data["nombre"]
+            telefono = form.cleaned_data["telefono"]
+            email = form.cleaned_data["email"]
+            producto = form.cleaned_data["producto"]
+
+            Proveedor.objects.create(
+                nombre=nombre, telefono=telefono, email=email, producto=producto
+            )
+
+            return render(request, "aplicacion/confirmacion-guardado.html")
+    else:
+        form = ProveedorForm()
+
+    ctx = {"proveedores": Proveedor.objects.all(), "form": form}
+    return render(request, "aplicacion/proveedores.html", ctx)
+
+
+def delete_proveedor(request, id):
+    Proveedor.objects.get(id=id).delete()
+    return render(request, "aplicacion/confirmacion-eliminado.html")
+
+
+def edit_proveedor(request, id):
+    proveedor = Proveedor.objects.get(id=id)
+    if request.method == "POST":
+        form = ProveedorForm(request.POST)
+        if form.is_valid():
+            proveedor.nombre = form.cleaned_data["nombre"]
+            proveedor.telefono = form.cleaned_data["telefono"]
+            proveedor.email = form.cleaned_data["email"]
+            proveedor.producto = form.cleaned_data["producto"]
+            proveedor.save()
+
+            return render(request, "aplicacion/confirmacion-guardado.html")
+    else:
+        form = ProveedorForm(
+            initial={
+                "nombre": proveedor.nombre,
+                "telefono": proveedor.telefono,
+                "email": proveedor.email,
+                "producto": proveedor.producto,
+            }
+        )
+
+    ctx = {"proveedores": Proveedor.objects.all(), "form": form}
 
     return render(request, "aplicacion/editar.html", ctx)
