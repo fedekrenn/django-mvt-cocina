@@ -13,6 +13,9 @@ class RecetaForm(forms.Form):
     dificultad = forms.ChoiceField(
         label="Dificultad", choices=DIFICULTAD, required=True
     )
+    imagen_url = forms.CharField(
+        label="URL de la imagen", max_length=200, required=True
+    )
 
 
 class CocineroForm(forms.Form):

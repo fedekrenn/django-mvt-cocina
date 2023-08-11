@@ -17,8 +17,10 @@ def index(request):
             ctx = {"error": "No se encontraron recetas con ese nombre"}
 
         return render(request, "aplicacion/index.html", ctx)
+    
+    ctx = {"recetas": Receta.objects.all()}
 
-    return render(request, "aplicacion/index.html")
+    return render(request, "aplicacion/index.html", ctx)
 
 
 def acerca_de_mi(request):
@@ -34,12 +36,14 @@ def recetas(request):
             ingredientes = form.cleaned_data["ingredientes"]
             tiempo = form.cleaned_data["tiempo"]
             dificultad = form.cleaned_data["dificultad"]
+            imagen_url = form.cleaned_data["imagen_url"]
 
             Receta.objects.create(
                 nombre=nombre,
                 ingredientes=ingredientes,
                 tiempo=tiempo,
                 dificultad=dificultad,
+                imagen_url=imagen_url,
             )
 
             return render(request, "aplicacion/confirmacion-guardado.html")
@@ -63,7 +67,7 @@ class RecetaUpdate(UpdateView):
     model = Receta
     nombre = "receta"
     url = "recetas"
-    fields = ["nombre", "ingredientes", "tiempo", "dificultad"]
+    fields = ["nombre", "ingredientes", "tiempo", "dificultad", "imagen_url"]
     success_url = reverse_lazy("recetas")
     template_name = "aplicacion/editar.html"
 
