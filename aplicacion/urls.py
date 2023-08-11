@@ -16,4 +16,8 @@ urlpatterns = [
     path("editar-cocinero/<int:pk>", CocineroUpdate.as_view(), name="edit_cocinero"),
     path("editar-restaurante/<int:pk>", RestauranteUpdate.as_view(), name="edit_restaurante"),
     path("editar-proveedor/<int:pk>", ProveedorUpdate.as_view(), name="edit_proveedor"),
+    path("detalle-receta/<int:pk>", RecetaDetail.as_view(), name="detail_receta"),
+    path("detalle-cocinero/<int:pk>", CocineroDetail.as_view(), name="detail_cocinero"),
+    path("detalle-restaurante/<int:pk>", RestauranteDetail.as_view(), name="detail_restaurante"),
+    path("detalle-proveedor/<int:pk>", ProveedorDetail.as_view(), name="detail_proveedor"),
 ]

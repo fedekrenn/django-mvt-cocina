@@ -4,6 +4,7 @@ from .models import Receta, Cocinero, Restaurante, Proveedor
 from .forms import RecetaForm, CocineroForm, RestauranteForm, ProveedorForm
 
 from django.views.generic import UpdateView, DeleteView
+from django.views.generic.detail import DetailView
 
 
 def index(request):
@@ -47,7 +48,7 @@ def recetas(request):
 
     ctx = {"recetas": Receta.objects.all(), "form": form}
 
-    return render(request, "aplicacion/recetas.html", ctx)
+    return render(request, "aplicacion/recetas/recetas.html", ctx)
 
 
 class RecetaDelete(DeleteView):
@@ -65,6 +66,11 @@ class RecetaUpdate(UpdateView):
     fields = ["nombre", "ingredientes", "tiempo", "dificultad"]
     success_url = reverse_lazy("recetas")
     template_name = "aplicacion/editar.html"
+
+
+class RecetaDetail(DetailView):
+    model = Receta
+    template_name = "aplicacion/recetas/detalle_receta.html"
 
 
 # Cocineros
@@ -86,7 +92,7 @@ def cocineros(request):
         form = CocineroForm()
 
     ctx = {"cocineros": Cocinero.objects.all(), "form": form}
-    return render(request, "aplicacion/cocineros.html", ctx)
+    return render(request, "aplicacion/cocineros/cocineros.html", ctx)
 
 
 class CocineroDelete(DeleteView):
@@ -104,6 +110,11 @@ class CocineroUpdate(UpdateView):
     fields = ["nombre", "apellido", "edad", "especialidad"]
     success_url = reverse_lazy("cocineros")
     template_name = "aplicacion/editar.html"
+
+
+class CocineroDetail(DetailView):
+    model = Cocinero
+    template_name = "aplicacion/cocineros/detalle_cocinero.html"
 
 
 # Restaurantes
@@ -128,7 +139,7 @@ def restaurantes(request):
         form = RestauranteForm()
 
     ctx = {"restaurantes": Restaurante.objects.all(), "form": form}
-    return render(request, "aplicacion/restaurante.html", ctx)
+    return render(request, "aplicacion/restaurantes/restaurante.html", ctx)
 
 
 class RestauranteDelete(DeleteView):
@@ -146,6 +157,11 @@ class RestauranteUpdate(UpdateView):
     fields = ["nombre", "direccion", "telefono", "categoria"]
     success_url = reverse_lazy("restaurantes")
     template_name = "aplicacion/editar.html"
+
+
+class RestauranteDetail(DetailView):
+    model = Restaurante
+    template_name = "aplicacion/restaurantes/detalle_restaurante.html"
 
 
 def proveedores(request):
@@ -166,7 +182,7 @@ def proveedores(request):
         form = ProveedorForm()
 
     ctx = {"proveedores": Proveedor.objects.all(), "form": form}
-    return render(request, "aplicacion/proveedores.html", ctx)
+    return render(request, "aplicacion/proveedores/proveedores.html", ctx)
 
 
 class ProveedorDelete(DeleteView):
@@ -184,3 +200,8 @@ class ProveedorUpdate(UpdateView):
     fields = ["nombre", "telefono", "email", "producto"]
     success_url = reverse_lazy("proveedores")
     template_name = "aplicacion/editar.html"
+
+
+class ProveedorDetail(DetailView):
+    model = Proveedor
+    template_name = "aplicacion/proveedores/detalle_proveedor.html"

@@ -29,6 +29,9 @@
       <td>{{cocinero.edad}}</td>
       <td>{{cocinero.especialidad}}</td>
       <td>
+        <a href="{% url 'detail_cocinero' cocinero.id %}">
+          <i class="fa-regular fa-eye" style="color: #ffffff;" title="Ver cocinero"></i>
+        </a>
         <a href="{% url 'delete_cocinero' cocinero.id %}">
           <i class="fa-regular fa-trash-can" style="color: #ffffff;" title="Eliminar cocinero"></i>
         </a>

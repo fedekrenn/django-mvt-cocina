@@ -29,6 +29,9 @@
       <td>{{receta.tiempo}}</td>
       <td>{{receta.dificultad}}</td>
       <td>
+        <a href="{% url 'detail_receta' receta.id %}">
+          <i class="fa-regular fa-eye" style="color: #ffffff;" title="Ver receta"></i>
+        </a>
         <a href="{% url 'delete_receta' receta.id %}">
           <i class="fa-regular fa-trash-can" style="color: #ffffff;" title="Eliminar receta"></i>
         </a>
