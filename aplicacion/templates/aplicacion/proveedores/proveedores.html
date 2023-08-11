@@ -29,6 +29,9 @@
       <td>{{proveedor.email}}</td>
       <td>{{proveedor.producto}}</td>
       <td>
+        <a href="{% url 'detail_proveedor' proveedor.id %}">
+          <i class="fa-regular fa-eye" style="color: #ffffff;" title="Ver proveedor"></i>
+        </a>
         <a href="{% url 'delete_proveedor' proveedor.id %}">
           <i class="fa-regular fa-trash-can" style="color: #ffffff;" title="Eliminar proveedor"></i>
         </a>
