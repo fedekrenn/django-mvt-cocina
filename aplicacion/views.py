@@ -1,9 +1,11 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from .models import Receta, Cocinero, Restaurante, Proveedor
 from .forms import RecetaForm, CocineroForm, RestauranteForm, ProveedorForm
 
+from django.views.generic import UpdateView, DeleteView
 
-# Create your views here.
+
 def index(request):
     if request.method == "POST":
         nombre = request.POST["nombre"]
@@ -22,6 +24,7 @@ def acerca_de_mi(request):
     return render(request, "aplicacion/acerca-de-mi.html")
 
 
+# Recetas
 def recetas(request):
     if request.method == "POST":
         form = RecetaForm(request.POST)
@@ -47,38 +50,24 @@ def recetas(request):
     return render(request, "aplicacion/recetas.html", ctx)
 
 
-def delete_receta(request, id):
-    Receta.objects.get(id=id).delete()
-    return render(request, "aplicacion/confirmacion-eliminado.html")
+class RecetaDelete(DeleteView):
+    model = Receta
+    nombre = "la receta"
+    url = "recetas"
+    success_url = reverse_lazy("recetas")
+    template_name = "aplicacion/eliminar.html"
 
 
-def edit_receta(request, id):
-    receta = Receta.objects.get(id=id)
-    if request.method == "POST":
-        form = RecetaForm(request.POST)
-        if form.is_valid():
-            receta.nombre = form.cleaned_data["nombre"]
-            receta.ingredientes = form.cleaned_data["ingredientes"]
-            receta.tiempo = form.cleaned_data["tiempo"]
-            receta.dificultad = form.cleaned_data["dificultad"]
-            receta.save()
-
-            return render(request, "aplicacion/confirmacion-guardado.html")
-    else:
-        form = RecetaForm(
-            initial={
-                "nombre": receta.nombre,
-                "ingredientes": receta.ingredientes,
-                "tiempo": receta.tiempo,
-                "dificultad": receta.dificultad,
-            }
-        )
-
-    ctx = {"recetas": Receta.objects.all(), "form": form}
-
-    return render(request, "aplicacion/editar.html", ctx)
+class RecetaUpdate(UpdateView):
+    model = Receta
+    nombre = "receta"
+    url = "recetas"
+    fields = ["nombre", "ingredientes", "tiempo", "dificultad"]
+    success_url = reverse_lazy("recetas")
+    template_name = "aplicacion/editar.html"
 
 
+# Cocineros
 def cocineros(request):
     if request.method == "POST":
         form = CocineroForm(request.POST)
@@ -100,38 +89,24 @@ def cocineros(request):
     return render(request, "aplicacion/cocineros.html", ctx)
 
 
-def delete_cocinero(request, id):
-    Cocinero.objects.get(id=id).delete()
-    return render(request, "aplicacion/confirmacion-eliminado.html")
+class CocineroDelete(DeleteView):
+    model = Cocinero
+    nombre = "el cocinero"
+    url = "cocineros"
+    success_url = reverse_lazy("cocineros")
+    template_name = "aplicacion/eliminar.html"
 
 
-def edit_cocinero(request, id):
-    cocinero = Cocinero.objects.get(id=id)
-    if request.method == "POST":
-        form = CocineroForm(request.POST)
-        if form.is_valid():
-            cocinero.nombre = form.cleaned_data["nombre"]
-            cocinero.apellido = form.cleaned_data["apellido"]
-            cocinero.edad = form.cleaned_data["edad"]
-            cocinero.especialidad = form.cleaned_data["especialidad"]
-            cocinero.save()
-
-            return render(request, "aplicacion/confirmacion-guardado.html")
-    else:
-        form = CocineroForm(
-            initial={
-                "nombre": cocinero.nombre,
-                "apellido": cocinero.apellido,
-                "edad": cocinero.edad,
-                "especialidad": cocinero.especialidad,
-            }
-        )
-
-    ctx = {"cocineros": Cocinero.objects.all(), "form": form}
-
-    return render(request, "aplicacion/editar.html", ctx)
+class CocineroUpdate(UpdateView):
+    model = Cocinero
+    nombre = "cocinero"
+    url = "cocineros"
+    fields = ["nombre", "apellido", "edad", "especialidad"]
+    success_url = reverse_lazy("cocineros")
+    template_name = "aplicacion/editar.html"
 
 
+# Restaurantes
 def restaurantes(request):
     if request.method == "POST":
         form = RestauranteForm(request.POST)
@@ -156,36 +131,21 @@ def restaurantes(request):
     return render(request, "aplicacion/restaurante.html", ctx)
 
 
-def delete_restaurante(request, id):
-    Restaurante.objects.get(id=id).delete()
-    return render(request, "aplicacion/confirmacion-eliminado.html")
+class RestauranteDelete(DeleteView):
+    model = Restaurante
+    nombre = "el restaurante"
+    url = "restaurantes"
+    success_url = reverse_lazy("restaurantes")
+    template_name = "aplicacion/eliminar.html"
 
 
-def edit_restaurante(request, id):
-    restaurante = Restaurante.objects.get(id=id)
-    if request.method == "POST":
-        form = RestauranteForm(request.POST)
-        if form.is_valid():
-            restaurante.nombre = form.cleaned_data["nombre"]
-            restaurante.direccion = form.cleaned_data["direccion"]
-            restaurante.telefono = form.cleaned_data["telefono"]
-            restaurante.categoria = form.cleaned_data["categoria"]
-            restaurante.save()
-
-            return render(request, "aplicacion/confirmacion-guardado.html")
-    else:
-        form = RestauranteForm(
-            initial={
-                "nombre": restaurante.nombre,
-                "direccion": restaurante.direccion,
-                "telefono": restaurante.telefono,
-                "categoria": restaurante.categoria,
-            }
-        )
-
-    ctx = {"restaurantes": Restaurante.objects.all(), "form": form}
-
-    return render(request, "aplicacion/editar.html", ctx)
+class RestauranteUpdate(UpdateView):
+    model = Restaurante
+    nombre = "restaurant"
+    url = "restaurantes"
+    fields = ["nombre", "direccion", "telefono", "categoria"]
+    success_url = reverse_lazy("restaurantes")
+    template_name = "aplicacion/editar.html"
 
 
 def proveedores(request):
@@ -209,33 +169,18 @@ def proveedores(request):
     return render(request, "aplicacion/proveedores.html", ctx)
 
 
-def delete_proveedor(request, id):
-    Proveedor.objects.get(id=id).delete()
-    return render(request, "aplicacion/confirmacion-eliminado.html")
+class ProveedorDelete(DeleteView):
+    model = Proveedor
+    nombre = "el proveedor"
+    url = "proveedores"
+    success_url = reverse_lazy("proveedores")
+    template_name = "aplicacion/eliminar.html"
 
 
-def edit_proveedor(request, id):
-    proveedor = Proveedor.objects.get(id=id)
-    if request.method == "POST":
-        form = ProveedorForm(request.POST)
-        if form.is_valid():
-            proveedor.nombre = form.cleaned_data["nombre"]
-            proveedor.telefono = form.cleaned_data["telefono"]
-            proveedor.email = form.cleaned_data["email"]
-            proveedor.producto = form.cleaned_data["producto"]
-            proveedor.save()
-
-            return render(request, "aplicacion/confirmacion-guardado.html")
-    else:
-        form = ProveedorForm(
-            initial={
-                "nombre": proveedor.nombre,
-                "telefono": proveedor.telefono,
-                "email": proveedor.email,
-                "producto": proveedor.producto,
-            }
-        )
-
-    ctx = {"proveedores": Proveedor.objects.all(), "form": form}
-
-    return render(request, "aplicacion/editar.html", ctx)
+class ProveedorUpdate(UpdateView):
+    model = Proveedor
+    nombre = "proveedor"
+    url = "proveedores"
+    fields = ["nombre", "telefono", "email", "producto"]
+    success_url = reverse_lazy("proveedores")
+    template_name = "aplicacion/editar.html"
