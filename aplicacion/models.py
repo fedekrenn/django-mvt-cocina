@@ -12,6 +12,7 @@ class Receta(models.Model):
         (3, "Difícil"),
     )
     dificultad = models.IntegerField(choices=DIFICULTAD)
+    imagen_url = models.CharField(max_length=2000)
 
     def __str__(self):
         return self.nombre

@@ -50,7 +50,7 @@ h2 {
   text-align: center;
 }
 
-button{
+button {
   margin: 0;
 }
 
@@ -69,6 +69,12 @@ button{
 td,
 th {
   text-align: center;
+  /* Alinear verticalmente */
+  vertical-align: middle;
+}
+
+td a {
+  margin: 0 .3em;
 }
 
 th {
@@ -76,6 +82,13 @@ th {
   font-weight: bold;
   color: #ffffff;
   font-style: italic;
+}
+
+.food-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 2px;
+  object-fit: cover;
 }
 
 .error {
@@ -96,6 +109,19 @@ th {
   margin: 1.6em;
 }
 
+
+.search-form {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+input#nombre {
+  margin: 0;
+}
+
 .input-form label {
   margin: 1em 0 .5em 0
 }
@@ -109,26 +135,53 @@ th {
   background-color: #31414e;
 }
 
+.card-container {
+  display: flex;
+  gap: 1em;
+  padding: 2em;
+  align-items: stretch;
+  justify-content: center;
+}
+
 .card {
   font-size: 16px;
-  width: 200px;
+  width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 1em auto;
-  padding: 1em;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #31414e;
   box-shadow: 0 0 5px #546574;
 }
 
-.card h3 {
-  color: #e1e2ec;
+.card-header {
+  position: relative;
+}
+
+.card-header img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px 10px 0 0;
+  object-fit: contain;
+}
+
+.card .h3-container {
+  position: absolute;
+  color: #ffffff;
+  top: 20px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
   font-size: 1.2em;
   margin: 0;
   text-align: center;
   font-weight: bold;
   font-family: 'Roboto', sans-serif;
+}
+
+.h3-container h3 {
+  background-color: rgba(0, 0, 0, .6)
 }
 
 .card span {

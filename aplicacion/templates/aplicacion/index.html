@@ -28,31 +28,37 @@
     </nav>
   </header>
   <main>
-    <section>
-      {% block content %}
-      <h2>Busqueda de recetas</h>
-        <form action="" method="POST" class="search-form">
-          {% csrf_token %}
-          <input type="text" id="nombre" name="nombre" placeholder="Comida a buscar...">
-          <button type="submit">Buscar</button>
-        </form>
-        {% if error %}
-        <p class="error">{{error}}</p>
-        {% endif %}
-        {% for receta in recetas %}
-        <div class="card">
-          <div class="card-header">
+    {% block content %}
+    <form action="" method="POST" class="search-form">
+      {% csrf_token %}
+      <label for="nombre">Buscar una receta: </label>
+      <input type="text" id="nombre" name="nombre" placeholder="Hamburguesas...">
+      <button type="submit">Buscar</button>
+    </form>
+    <hr>
+    {% if error %}
+    <p class="error">{{error}}</p>
+    {% endif %}
+    <section class="card-container">
+      {% for receta in recetas %}
+      <div class="card">
+        <div class="card-header">
+          <div class="h3-container">
             <h3>{{receta.nombre}}</h3>
           </div>
-          <div class="card-body">
-            <p><span>Ingredientes:</span> {{receta.ingredientes}}</p>
-            <p><span>Tiempo:</span> {{receta.tiempo}} minutos</p>
-            <p><span>Dificultad:</span> {{receta.dificultad}} / 3</p>
-          </div>
+          <img src="{{receta.imagen_url}}" alt="{{receta.nombre}}">
         </div>
-        {% endfor %}
-        {% endblock %}
+        <div class="card-body">
+          <p>⏳ <span>Tiempo:</span> {{receta.tiempo}} minutos</p>
+          <p>📊 <span>Dificultad:</span> {{receta.dificultad}} / 3</p>
+          <a class="btn" href="{% url 'detail_receta' receta.id %}">
+            Ver más
+          </a>
+        </div>
+      </div>
+      {% endfor %}
     </section>
+    {% endblock %}
   </main>
   <script src="https://kit.fontawesome.com/94c0117dd6.js" crossorigin="anonymous"></script>
   <script src="{% static 'aplicacion/js/main.js' %}"></script>
