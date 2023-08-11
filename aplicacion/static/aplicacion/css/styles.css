@@ -137,10 +137,21 @@ input#nombre {
 
 .card-container {
   display: flex;
-  gap: 1em;
+  flex-wrap: wrap;
+  gap: 2em;
   padding: 2em;
   align-items: stretch;
   justify-content: center;
+}
+
+.card-container a{
+  color: inherit
+}
+
+.card-container a:hover{
+  text-decoration: none;
+  transform: scale(1.05);
+  transition: all .3s ease-in-out;
 }
 
 .card {
@@ -160,9 +171,10 @@ input#nombre {
 
 .card-header img {
   width: 100%;
-  height: auto;
+  /* height: auto; */
+  min-height: 200px;
   border-radius: 10px 10px 0 0;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .card .h3-container {
@@ -268,4 +280,38 @@ article ul {
 .profile-img {
   border-radius: 5px;
   filter: grayscale(100%);
+}
+
+.description-section h2 {
+  font-size: 2.7em;
+  margin: 0;
+}
+
+.description-section .info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  margin: 2em 0;
+}
+
+.img-desc {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.description-section article {
+  width: 90%;
+  display: flex;
+  padding: .7em;
+  margin: 3em auto;
+  border-radius: 15px;
+  gap: 2em;
+}
+
+.card a.btn {
+  display: block;
+  margin: 0 auto;
 }

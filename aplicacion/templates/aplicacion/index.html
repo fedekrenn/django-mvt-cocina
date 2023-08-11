@@ -41,21 +41,20 @@
     {% endif %}
     <section class="card-container">
       {% for receta in recetas %}
-      <div class="card">
-        <div class="card-header">
-          <div class="h3-container">
-            <h3>{{receta.nombre}}</h3>
+      <a href="{% url 'detail_receta' receta.id %}">
+        <div class="card">
+          <div class="card-header">
+            <div class="h3-container">
+              <h3>{{receta.nombre}}</h3>
+            </div>
+            <img src="{{receta.imagen_url}}" alt="{{receta.nombre}}">
           </div>
-          <img src="{{receta.imagen_url}}" alt="{{receta.nombre}}">
+          <div class="card-body">
+            <p>⏳ {{receta.tiempo}} minutos</p>
+            <p>📊 <span>Dificultad:</span> {{receta.dificultad}} / 3</p>
+          </div>
         </div>
-        <div class="card-body">
-          <p>⏳ <span>Tiempo:</span> {{receta.tiempo}} minutos</p>
-          <p>📊 <span>Dificultad:</span> {{receta.dificultad}} / 3</p>
-          <a class="btn" href="{% url 'detail_receta' receta.id %}">
-            Ver más
-          </a>
-        </div>
-      </div>
+      </a>
       {% endfor %}
     </section>
     {% endblock %}
