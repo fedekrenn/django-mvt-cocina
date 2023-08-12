@@ -23,6 +23,9 @@ class Cocinero(models.Model):
     apellido = models.CharField(max_length=50)
     edad = models.IntegerField()
     especialidad = models.CharField(max_length=50)
+    anios_experiencia = models.IntegerField()
+    email = models.CharField(max_length=50)
+    telefono = models.CharField(max_length=50)
 
     def __str__(self):
         return self.nombre + " " + self.apellido
@@ -39,6 +42,17 @@ class Restaurante(models.Model):
         ("Cena", "Cena"),
     )
     categoria = models.CharField(max_length=50, choices=CATEGORIA)
+    envio_domilicio = models.BooleanField()
+    CALIFICACIONES = (
+        (1, "A mejorar"),
+        (2, "Regular"),
+        (3, "Bueno"),
+        (4, "Muy bueno"),
+        (5, "Excelente"),
+    )
+    calificacion = models.IntegerField(choices=CALIFICACIONES)
+    capacidad = models.IntegerField()
+    eventos = models.BooleanField()
 
     def __str__(self):
         return self.nombre

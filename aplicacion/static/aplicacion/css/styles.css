@@ -315,3 +315,24 @@ article ul {
   display: block;
   margin: 0 auto;
 }
+
+.model-detail ul {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  font-size: 1em;
+  width: 400px;
+  margin: 0 auto;
+  padding: 2em;
+  background-color: #364552;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.model-detail span{
+  font-weight: bold;
+  font-weight: 1.2em;
+  text-decoration: underline;
+  margin-right: 5px;
+}

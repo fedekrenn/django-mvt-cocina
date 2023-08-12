@@ -25,6 +25,11 @@ class CocineroForm(forms.Form):
     )
     edad = forms.IntegerField(label="Edad", required=True)
     especialidad = forms.CharField(label="Especialidad del cocinero", max_length=50)
+    anios_experiencia = forms.IntegerField(label="Años de experiencia", required=True)
+    email = forms.CharField(label="Email", max_length=50, required=True)
+    telefono = forms.CharField(
+        label="Teléfono del contacto", max_length=50, required=True
+    )
 
 
 class RestauranteForm(forms.Form):
@@ -42,6 +47,19 @@ class RestauranteForm(forms.Form):
         ("Cena", "Cena"),
     )
     categoria = forms.ChoiceField(label="Categoría", choices=CATEGORIA, required=True)
+    envio_domilicio = forms.BooleanField(label="¿Envío a domicilio?", required=False)
+    CALIFICACIONES = (
+        (1, "A mejorar"),
+        (2, "Regular"),
+        (3, "Bueno"),
+        (4, "Muy bueno"),
+        (5, "Excelente"),
+    )
+    calificacion = forms.ChoiceField(
+        label="Calificación", choices=CALIFICACIONES, required=True
+    )
+    capacidad = forms.IntegerField(label="Capacidad", required=True)
+    eventos = forms.BooleanField(label="¿Eventos?", required=False)
 
 
 class ProveedorForm(forms.Form):

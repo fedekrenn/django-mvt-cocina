@@ -17,7 +17,7 @@ def index(request):
             ctx = {"error": "No se encontraron recetas con ese nombre"}
 
         return render(request, "aplicacion/index.html", ctx)
-    
+
     ctx = {"recetas": Receta.objects.all()}
 
     return render(request, "aplicacion/index.html", ctx)
@@ -86,9 +86,18 @@ def cocineros(request):
             apellido = form.cleaned_data["apellido"]
             edad = form.cleaned_data["edad"]
             especialidad = form.cleaned_data["especialidad"]
+            anios_experiencia = form.cleaned_data["anios_experiencia"]
+            email = form.cleaned_data["email"]
+            telefono = form.cleaned_data["telefono"]
 
             Cocinero.objects.create(
-                nombre=nombre, apellido=apellido, edad=edad, especialidad=especialidad
+                nombre=nombre,
+                apellido=apellido,
+                edad=edad,
+                especialidad=especialidad,
+                anios_experiencia=anios_experiencia,
+                email=email,
+                telefono=telefono,
             )
 
             return render(request, "aplicacion/confirmacion-guardado.html")
@@ -111,7 +120,15 @@ class CocineroUpdate(UpdateView):
     model = Cocinero
     nombre = "cocinero"
     url = "cocineros"
-    fields = ["nombre", "apellido", "edad", "especialidad"]
+    fields = [
+        "nombre",
+        "apellido",
+        "edad",
+        "especialidad",
+        "anios_experiencia",
+        "email",
+        "telefono",
+    ]
     success_url = reverse_lazy("cocineros")
     template_name = "aplicacion/editar.html"
 
@@ -130,12 +147,20 @@ def restaurantes(request):
             direccion = form.cleaned_data["direccion"]
             telefono = form.cleaned_data["telefono"]
             categoria = form.cleaned_data["categoria"]
+            envio_domilicio = form.cleaned_data["envio_domilicio"]
+            calificacion = form.cleaned_data["calificacion"]
+            capacidad = form.cleaned_data["capacidad"]
+            eventos = form.cleaned_data["eventos"]
 
             Restaurante.objects.create(
                 nombre=nombre,
                 direccion=direccion,
                 telefono=telefono,
                 categoria=categoria,
+                envio_domilicio=envio_domilicio,
+                calificacion=calificacion,
+                capacidad=capacidad,
+                eventos=eventos,
             )
 
             return render(request, "aplicacion/confirmacion-guardado.html")
@@ -158,7 +183,16 @@ class RestauranteUpdate(UpdateView):
     model = Restaurante
     nombre = "restaurant"
     url = "restaurantes"
-    fields = ["nombre", "direccion", "telefono", "categoria"]
+    fields = [
+        "nombre",
+        "direccion",
+        "telefono",
+        "categoria",
+        "envio_domilicio",
+        "calificacion",
+        "capacidad",
+        "eventos",
+    ]
     success_url = reverse_lazy("restaurantes")
     template_name = "aplicacion/editar.html"
 
