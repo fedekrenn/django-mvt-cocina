@@ -210,9 +210,20 @@ def proveedores(request):
             telefono = form.cleaned_data["telefono"]
             email = form.cleaned_data["email"]
             producto = form.cleaned_data["producto"]
+            localidad = form.cleaned_data["localidad"]
+            sitio_web = form.cleaned_data["sitio_web"]
+            metodos_pago = form.cleaned_data["metodos_pago"]
+            entrega_inmediata = form.cleaned_data["entrega_inmediata"]
 
             Proveedor.objects.create(
-                nombre=nombre, telefono=telefono, email=email, producto=producto
+                nombre=nombre,
+                telefono=telefono,
+                email=email,
+                producto=producto,
+                localidad=localidad,
+                sitio_web=sitio_web,
+                metodos_pago=metodos_pago,
+                entrega_inmediata=entrega_inmediata,
             )
 
             return render(request, "aplicacion/confirmacion-guardado.html")
@@ -235,7 +246,16 @@ class ProveedorUpdate(UpdateView):
     model = Proveedor
     nombre = "proveedor"
     url = "proveedores"
-    fields = ["nombre", "telefono", "email", "producto"]
+    fields = [
+        "nombre",
+        "telefono",
+        "email",
+        "producto",
+        "localidad",
+        "sitio_web",
+        "metodos_pago",
+        "entrega_inmediata",
+    ]
     success_url = reverse_lazy("proveedores")
     template_name = "aplicacion/editar.html"
 

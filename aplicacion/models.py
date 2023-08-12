@@ -1,7 +1,6 @@
 from django.db import models
 
 
-# Create your models here.
 class Receta(models.Model):
     nombre = models.CharField(max_length=50)
     ingredientes = models.CharField(max_length=200)
@@ -71,6 +70,16 @@ class Proveedor(models.Model):
         ("Pan", "Pan"),
     )
     producto = models.CharField(max_length=50, choices=PRODUCTO)
+    localidad = models.CharField(max_length=50)
+    sitio_web = models.CharField(max_length=50)
+    METODOS_PAGO = (
+        ("Efectivo", "Efectivo"),
+        ("Tarjeta", "Tarjeta"),
+        ("Transferencia", "Transferencia"),
+        ("Todos", "Todos"),
+    )
+    metodos_pago = models.CharField(max_length=50, choices=METODOS_PAGO)
+    entrega_inmediata = models.BooleanField()
 
     def __str__(self):
         return self.nombre + " - " + self.producto
