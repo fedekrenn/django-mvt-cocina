@@ -10,36 +10,24 @@ class RecetaForm(forms.Form):
         (2, "Media"),
         (3, "Difícil"),
     )
-    dificultad = forms.ChoiceField(
-        label="Dificultad", choices=DIFICULTAD, required=True
-    )
-    imagen_url = forms.CharField(
-        label="URL de la imagen", max_length=200, required=True
-    )
+    dificultad = forms.ChoiceField(label="Dificultad", choices=DIFICULTAD, required=True)
+    imagen_url = forms.CharField(label="URL de la imagen", max_length=200, required=True)
 
 
 class CocineroForm(forms.Form):
     nombre = forms.CharField(label="Nombre del cocinero", max_length=50, required=True)
-    apellido = forms.CharField(
-        label="Apellido del cocinero", max_length=50, required=True
-    )
+    apellido = forms.CharField(label="Apellido del cocinero", max_length=50, required=True)
     edad = forms.IntegerField(label="Edad", required=True)
     especialidad = forms.CharField(label="Especialidad del cocinero", max_length=50)
     anios_experiencia = forms.IntegerField(label="Años de experiencia", required=True)
     email = forms.CharField(label="Email", max_length=50, required=True)
-    telefono = forms.CharField(
-        label="Teléfono del contacto", max_length=50, required=True
-    )
+    telefono = forms.CharField(label="Teléfono del contacto", max_length=50, required=True)
 
 
 class RestauranteForm(forms.Form):
-    nombre = forms.CharField(
-        label="Nombre del restaurante", max_length=50, required=True
-    )
+    nombre = forms.CharField(label="Nombre del restaurante", max_length=50, required=True)
     direccion = forms.CharField(label="Dirección", max_length=50, required=True)
-    telefono = forms.CharField(
-        label="Teléfono del contacto", max_length=50, required=True
-    )
+    telefono = forms.CharField(label="Teléfono del contacto", max_length=50, required=True)
     CATEGORIA = (
         ("Comida rápida", "Comida rápida"),
         ("Meriendas", "Meriendas"),
@@ -55,20 +43,15 @@ class RestauranteForm(forms.Form):
         (4, "Muy bueno"),
         (5, "Excelente"),
     )
-    calificacion = forms.ChoiceField(
-        label="Calificación", choices=CALIFICACIONES, required=True
-    )
+    calificacion = forms.ChoiceField(label="Calificación", choices=CALIFICACIONES, required=True)
     capacidad = forms.IntegerField(label="Capacidad", required=True)
     eventos = forms.BooleanField(label="¿Eventos?", required=False)
 
 
 class ProveedorForm(forms.Form):
     nombre = forms.CharField(label="Nombre del proveedor", max_length=50, required=True)
-    telefono = forms.CharField(
-        label="Teléfono del contacto", max_length=50, required=True
-    )
+    telefono = forms.CharField(label="Teléfono del contacto", max_length=50, required=True)
     email = forms.CharField(label="Email", max_length=50, required=True)
-
     PRODUCTO = (
         ("Carnes", "Carnes"),
         ("Verdura", "Verdura"),
@@ -78,3 +61,13 @@ class ProveedorForm(forms.Form):
         ("Pan", "Pan"),
     )
     producto = forms.ChoiceField(label="Producto", choices=PRODUCTO, required=True)
+    localidad = forms.CharField(label="Localidad", max_length=50, required=True)
+    sitio_web = forms.CharField(label="Sitio web", max_length=50, required=True)
+    METODOS_PAGO = (
+        ("Efectivo", "Efectivo"),
+        ("Tarjeta", "Tarjeta"),
+        ("Transferencia", "Transferencia"),
+        ("Todos", "Todos"),
+    )
+    metodos_pago = forms.ChoiceField(label="Métodos de pago", choices=METODOS_PAGO, required=True)
+    entrega_inmediata = forms.BooleanField(label="¿Entrega inmediata?", required=False)
