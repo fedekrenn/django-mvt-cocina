@@ -66,6 +66,10 @@ button {
   margin-left: .5em;
 }
 
+table a:hover{
+  text-decoration: none;
+}
+
 td,
 th {
   text-align: center;
@@ -171,8 +175,8 @@ input#nombre {
 
 .card-header img {
   width: 100%;
-  /* height: auto; */
   min-height: 200px;
+  aspect-ratio: 2/1;
   border-radius: 10px 10px 0 0;
   object-fit: cover;
 }
@@ -314,6 +318,10 @@ article ul {
 .card a.btn {
   display: block;
   margin: 0 auto;
+}
+
+.model-detail {
+  min-height: 70vh;
 }
 
 .model-detail ul {

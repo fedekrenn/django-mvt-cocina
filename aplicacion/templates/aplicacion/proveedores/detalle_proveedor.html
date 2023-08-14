@@ -2,23 +2,18 @@
 {% block title %} Detalle del proveedor {% endblock %}
 {% block content %}
 <section class="model-detail">
-  <h2>Detalle del restaurante</h2>
+  <h2>Detalle del proveedor</h2>
   <ul>
-    <li><span>Nombre de la empresa:</span> {{ restaurante.nombre }}</li>
-    <li><span>Dirección laboral:</span> {{restaurante.direccion}}</li>
-    <li><span>Categoría:</span> {{restaurante.categoria}}</li>
-    <li><span>Envío a domicilio:</span>
-      {% if restaurante.envio_domilicio %}
-      Si
-      {% else %}
-      No
-      {% endif %}
-    </li>
-    <li><span>Calificación:</span> {{restaurante.calificacion}} ⭐</li>
-    <li><span>Capacidad:</span>{{restaurante.capacidad}} personas</li>
-    <li><span>Se realizan eventos</span>
-      {% if restaurante.eventos %}
-      Si
+    <li><span>Nombre del proveedor:</span> {{ proveedor.nombre }}</li>
+    <li><span>Teléfono:</span> {{proveedor.telefono}}</li>
+    <li><span>Email:</span> {{proveedor.email}}</li>
+    <li><span>Localidad:</span>{{proveedor.localidad}}</li>
+    <li><span>Sitio web:</span>{{proveedor.sitio_web}}</li>
+    <li><span>Productos distribuidos:</span>{{proveedor.producto}}</li>
+    <li><span>Métodos de pago aceptados:</span>{{proveedor.metodos_pago}}</li>
+    <li><span>Entrega inmediata:</span>
+      {% if proveedor.entrega_inmediata %}
+      Sí
       {% else %}
       No
       {% endif %}
