@@ -8,8 +8,14 @@ from .forms import (
     ProveedorForm,
     CustomUserCreationForm,
 )
+
+# Auth
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+
+# Views
 from django.views.generic import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 
@@ -35,6 +41,7 @@ def acerca_de_mi(request):
 
 
 # Recetas
+@login_required
 def recetas(request):
     if request.method == "POST":
         form = RecetaForm(request.POST)
@@ -62,7 +69,7 @@ def recetas(request):
     return render(request, "aplicacion/recetas/recetas.html", ctx)
 
 
-class RecetaDelete(DeleteView):
+class RecetaDelete(LoginRequiredMixin, DeleteView):
     model = Receta
     nombre = "la receta"
     url = "recetas"
@@ -70,7 +77,7 @@ class RecetaDelete(DeleteView):
     template_name = "aplicacion/eliminar.html"
 
 
-class RecetaUpdate(UpdateView):
+class RecetaUpdate(LoginRequiredMixin, UpdateView):
     model = Receta
     nombre = "receta"
     url = "recetas"
@@ -85,6 +92,7 @@ class RecetaDetail(DetailView):
 
 
 # Cocineros
+@login_required
 def cocineros(request):
     if request.method == "POST":
         form = CocineroForm(request.POST)
@@ -115,7 +123,7 @@ def cocineros(request):
     return render(request, "aplicacion/cocineros/cocineros.html", ctx)
 
 
-class CocineroDelete(DeleteView):
+class CocineroDelete(LoginRequiredMixin, DeleteView):
     model = Cocinero
     nombre = "el cocinero"
     url = "cocineros"
@@ -123,7 +131,7 @@ class CocineroDelete(DeleteView):
     template_name = "aplicacion/eliminar.html"
 
 
-class CocineroUpdate(UpdateView):
+class CocineroUpdate(LoginRequiredMixin, UpdateView):
     model = Cocinero
     nombre = "cocinero"
     url = "cocineros"
@@ -140,12 +148,13 @@ class CocineroUpdate(UpdateView):
     template_name = "aplicacion/editar.html"
 
 
-class CocineroDetail(DetailView):
+class CocineroDetail(LoginRequiredMixin, DetailView):
     model = Cocinero
     template_name = "aplicacion/cocineros/detalle_cocinero.html"
 
 
 # Restaurantes
+@login_required
 def restaurantes(request):
     if request.method == "POST":
         form = RestauranteForm(request.POST)
@@ -178,7 +187,7 @@ def restaurantes(request):
     return render(request, "aplicacion/restaurantes/restaurante.html", ctx)
 
 
-class RestauranteDelete(DeleteView):
+class RestauranteDelete(LoginRequiredMixin, DeleteView):
     model = Restaurante
     nombre = "el restaurante"
     url = "restaurantes"
@@ -186,7 +195,7 @@ class RestauranteDelete(DeleteView):
     template_name = "aplicacion/eliminar.html"
 
 
-class RestauranteUpdate(UpdateView):
+class RestauranteUpdate(LoginRequiredMixin, UpdateView):
     model = Restaurante
     nombre = "restaurant"
     url = "restaurantes"
@@ -204,12 +213,13 @@ class RestauranteUpdate(UpdateView):
     template_name = "aplicacion/editar.html"
 
 
-class RestauranteDetail(DetailView):
+class RestauranteDetail(LoginRequiredMixin, DetailView):
     model = Restaurante
     template_name = "aplicacion/restaurantes/detalle_restaurante.html"
 
 
 # Proveedores
+@login_required
 def proveedores(request):
     if request.method == "POST":
         form = ProveedorForm(request.POST)
@@ -242,7 +252,7 @@ def proveedores(request):
     return render(request, "aplicacion/proveedores/proveedores.html", ctx)
 
 
-class ProveedorDelete(DeleteView):
+class ProveedorDelete(LoginRequiredMixin, DeleteView):
     model = Proveedor
     nombre = "el proveedor"
     url = "proveedores"
@@ -250,7 +260,7 @@ class ProveedorDelete(DeleteView):
     template_name = "aplicacion/eliminar.html"
 
 
-class ProveedorUpdate(UpdateView):
+class ProveedorUpdate(LoginRequiredMixin, UpdateView):
     model = Proveedor
     nombre = "proveedor"
     url = "proveedores"
@@ -268,7 +278,7 @@ class ProveedorUpdate(UpdateView):
     template_name = "aplicacion/editar.html"
 
 
-class ProveedorDetail(DetailView):
+class ProveedorDetail(LoginRequiredMixin, DetailView):
     model = Proveedor
     template_name = "aplicacion/proveedores/detalle_proveedor.html"
 
