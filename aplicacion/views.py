@@ -1,8 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from .models import Receta, Cocinero, Restaurante, Proveedor
-from .forms import RecetaForm, CocineroForm, RestauranteForm, ProveedorForm
-
+from .forms import (
+    RecetaForm,
+    CocineroForm,
+    RestauranteForm,
+    ProveedorForm,
+    CustomUserCreationForm,
+)
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login, logout
 from django.views.generic import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 
@@ -202,6 +209,7 @@ class RestauranteDetail(DetailView):
     template_name = "aplicacion/restaurantes/detalle_restaurante.html"
 
 
+# Proveedores
 def proveedores(request):
     if request.method == "POST":
         form = ProveedorForm(request.POST)
@@ -263,3 +271,46 @@ class ProveedorUpdate(UpdateView):
 class ProveedorDetail(DetailView):
     model = Proveedor
     template_name = "aplicacion/proveedores/detalle_proveedor.html"
+
+
+# Login
+def login_request(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            usuario = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+
+            user = authenticate(username=usuario, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect("inicio")
+
+            else:
+                return render(
+                    request,
+                    "aplicacion/login.html",
+                    {"error": "Usuario o contraseña incorrectos", "form": form},
+                )
+        else:
+            return render(
+                request,
+                "aplicacion/login.html",
+                {"error": "Usuario o contraseña incorrectos", "form": form},
+            )
+
+    form = AuthenticationForm()
+    return render(request, "aplicacion/login.html", {"form": form})
+
+
+def register(request):
+    if request.method == "POST":
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.cleaned_data.get("username")
+            form.save()
+            return render(request, "aplicacion/usuario-creado.html", {"user": user})
+    else:
+        form = CustomUserCreationForm()
+
+    return render(request, "aplicacion/registro.html", {"form": form})

@@ -55,8 +55,7 @@ si es correcta, redirigirá a una page de confirmación y se podrá ver la nueva
 
 <br><br>
 
-6 - En la ruta `/admin` se puede hacer CRUD mediante el panel que provee Django, existe un superuser cargado con user: "admin"
-y pass "admin"
+6 - En la ruta `/admin` se puede hacer CRUD mediante el panel que provee Django, existe un superuser cargado con user: "admin" y pass "admin"
 
 <br>
 
