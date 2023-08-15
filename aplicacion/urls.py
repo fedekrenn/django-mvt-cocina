@@ -8,6 +8,8 @@ urlpatterns = [
     path("login/", login_request, name="login"),
     path("logout/", LogoutView.as_view(template_name="aplicacion/logout.html"), name="logout"),
     path("register/", register, name="registro"),
+    path("editar-perfil/", edit_profile, name="editar_perfil"),
+    path("agregar-avatar", add_avatar, name="agregar_avatar"),
     path("recetas/", recetas, name="recetas"),
     path("cocineros/", cocineros, name="cocineros"),
     path("restaurantes/", restaurantes, name="restaurantes"),

@@ -73,6 +73,7 @@ class ProveedorForm(forms.Form):
     metodos_pago = forms.ChoiceField(label="Métodos de pago", choices=METODOS_PAGO, required=True)
     entrega_inmediata = forms.BooleanField(label="¿Entrega inmediata?", required=False)
 
+
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(label="Email", max_length=50, required=True)
     password1 = forms.CharField(label="Contraseña", max_length=50, required=True, widget=forms.PasswordInput)
@@ -81,4 +82,22 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ("username", "email", "password1", "password2")
-        help_texts = {k:"" for k in fields}  
+        help_texts = {k:"" for k in fields}
+
+
+class UserEditForm(UserCreationForm):
+    email = forms.EmailField(label="Email", max_length=50, required=True)
+    first_name = forms.CharField(label="Nombre", max_length=50, required=False)
+    last_name = forms.CharField(label="Apellido", max_length=50, required=False)
+    password1 = forms.CharField(label="Contraseña", max_length=50, widget=forms.PasswordInput, required=False)
+    password2 = forms.CharField(label="Confirmar contraseña", max_length=50, widget=forms.PasswordInput, required=False)
+
+    class Meta:
+        model = User
+        fields = ("email", "first_name", "last_name", "password1", "password2")
+        help_texts = {k:"" for k in fields}
+
+
+class AvatarForm(forms.Form):
+    imagen = forms.ImageField(label="Avatar", required=True)
+    

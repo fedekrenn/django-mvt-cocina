@@ -17,6 +17,31 @@
   <header>
     <nav>
       <ul>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt" title="Logout"></i> </a></li>
+        <li>
+          <a href="{% url 'editar_perfil' %}" title="Editar perfil">
+            {% if request.session.avatar %}
+            <img src="{{ request.session.avatar }}" class="avatar rounded" />
+            {% else %}
+            <i class="fas fa-user-circle"></i>
+            {% endif %}
+            {{ user.username }}
+          </a>
+        </li>
+        {% else %}
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'registro' %}">Registro</a></li>
+        {% endif %}
+        {% if user.is_staff %}
+        <li><a href="{% url 'admin:index' %}">
+            <i class="fas fa-user-shield" title="Acceso administrador"></i>
+          </a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    <nav>
+      <ul>
 
         <li><a href="{% url 'inicio' %}">Inicio</a></li>
         {% if user.is_authenticated %}
@@ -24,13 +49,6 @@
         <li><a href="{% url 'cocineros' %}">Cocineros</a></li>
         <li><a href="{% url 'restaurantes' %}">Restaurantes</a></li>
         <li><a href="{% url 'proveedores' %}">Proveedores</a></li>
-        <li><a href="{% url 'logout' %}">Logout</a></li>
-        {% if user.is_staff %}
-        <li><a href="{% url 'admin:index' %}">Panel</a></li>
-        {% endif %}
-        {% else %}
-        <li><a href="{% url 'login' %}">Login</a></li>
-        <li><a href="{% url 'registro' %}">Registro</a></li>
         {% endif %}
         <li><a href="{% url 'acerca_de_mi' %}">Acerca de mi</a></li>
       </ul>
