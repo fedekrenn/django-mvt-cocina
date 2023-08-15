@@ -1,17 +1,11 @@
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from .models import Receta, Cocinero, Restaurante, Proveedor
-from .forms import (
-    RecetaForm,
-    CocineroForm,
-    RestauranteForm,
-    ProveedorForm,
-    CustomUserCreationForm,
-)
+from .models import *
+from .forms import *
 
 # Auth
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
@@ -324,3 +318,54 @@ def register(request):
         form = CustomUserCreationForm()
 
     return render(request, "aplicacion/registro.html", {"form": form})
+
+
+@login_required
+def edit_profile(request):
+    usuario = request.user
+    if request.method == "POST":
+        form = UserEditForm(request.POST)
+        if form.is_valid():
+            informacion = form.cleaned_data
+            usuario.first_name = informacion["first_name"]
+            usuario.last_name = informacion["last_name"]
+            usuario.email = informacion["email"]
+            usuario.password1 = informacion["password1"]
+            usuario.password2 = informacion["password2"]
+            if usuario.password1 == usuario.password2:
+                usuario.set_password(usuario.password1)
+                update_session_auth_hash(request, usuario)
+                usuario.save()
+                return render(request, "aplicacion/confirmacion-guardado.html")
+    else:
+        form = UserEditForm(
+            initial={
+                "first_name": usuario.first_name,
+                "last_name": usuario.last_name,
+                "email": usuario.email,
+            }
+        )
+
+    return render(request, "aplicacion/editar-perfil.html", {"form": form})
+
+
+@login_required
+def add_avatar(request):
+    if request.method == "POST":
+        form = AvatarForm(request.POST, request.FILES)
+        if form.is_valid():
+            u = User.objects.get(username=request.user)
+            anterior_avatar = Avatar.objects.filter(user=u)
+            if len(anterior_avatar) > 0:
+                anterior_avatar[0].delete()
+
+            avatar = Avatar(user=u, imagen=form.cleaned_data["imagen"])
+            avatar.save()
+
+            imagen = Avatar.objects.get(user=request.user.id).imagen.url
+            request.session["avatar"] = imagen
+
+            return render(request, "aplicacion/confirmacion-guardado.html")
+    else:
+        form = AvatarForm()
+    return render(request, "aplicacion/edit-avatar.html", {"form": form})

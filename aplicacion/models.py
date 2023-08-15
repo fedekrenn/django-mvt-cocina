@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class Receta(models.Model):
     nombre = models.CharField(max_length=50)
@@ -83,3 +83,11 @@ class Proveedor(models.Model):
 
     def __str__(self):
         return self.nombre + " - " + self.producto
+
+
+class Avatar(models.Model):
+    imagen = models.ImageField(upload_to="avatares")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Avatar de {self.user.username}'

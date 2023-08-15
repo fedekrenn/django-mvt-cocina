@@ -29,6 +29,26 @@ li {
   list-style: none;
 }
 
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.rounded {
+  border: 2px solid #fff;
+}
+
+.rounded:hover {
+  border: 2px solid #31414e;
+}
+
+.avatar:hover {
+  transform: scale(1.1);
+  transition: all .3s ease-in-out;
+}
+
 header a {
   text-decoration: none;
   color: #1a242f;
@@ -66,7 +86,7 @@ button {
   margin-left: .5em;
 }
 
-table a:hover{
+table a:hover {
   text-decoration: none;
 }
 
@@ -148,11 +168,11 @@ input#nombre {
   justify-content: center;
 }
 
-.card-container a{
+.card-container a {
   color: inherit
 }
 
-.card-container a:hover{
+.card-container a:hover {
   text-decoration: none;
   transform: scale(1.05);
   transition: all .3s ease-in-out;
@@ -338,7 +358,7 @@ article ul {
   color: #fff;
 }
 
-.model-detail span{
+.model-detail span {
   font-weight: bold;
   font-weight: 1.2em;
   text-decoration: underline;
