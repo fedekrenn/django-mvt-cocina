@@ -8,25 +8,59 @@ body {
   max-width: 100%;
 }
 
-nav {
+nav.urls {
   min-height: 40vh;
-  background-image: url('../assets/header.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
 }
 
-ul {
+nav.sesion ul {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 1em;
+  margin: 0;
+  padding: .7em;
+}
+
+nav.sesion i {
+  font-size: 2em;
+}
+
+.urls ul {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  padding: 1em 0 2em 0;
+  padding-bottom: 2em;
   margin: 0;
   font-size: 1.5em;
 }
 
 li {
   list-style: none;
+}
+
+.avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: .9em;
+}
+
+.link-avatar{
+  display: inline-block;
+  padding: .8em;
+  border-radius: 5px;
+  background-color: #31414e;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+}
+
+.sesion a:hover,
+.sesion a i:hover {
+  text-decoration: none;
+  transform: scale(1.1);
+  transition: all .3s ease-in-out;
 }
 
 .avatar {
@@ -47,6 +81,13 @@ li {
 .avatar:hover {
   transform: scale(1.1);
   transition: all .3s ease-in-out;
+}
+
+header {
+  background-image: url('../assets/header.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 header a {
@@ -115,14 +156,21 @@ th {
   object-fit: cover;
 }
 
-.error {
+.error, .errorlist {
   color: red;
   text-align: center;
 }
 
+
 #show-dialog {
   display: block;
   margin: 2em auto;
+}
+
+.form-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .input-form,
@@ -133,6 +181,14 @@ th {
   margin: 1.6em;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+
+}
 
 .search-form {
   display: flex;
@@ -238,7 +294,7 @@ section.about {
 article {
   min-height: 300px;
   width: 70%;
-  margin: 0 auto;
+  margin: 2em auto;
   padding: 1em;
   border-radius: 5px;
   background-color: rgb(26, 36, 47);
@@ -249,23 +305,26 @@ article a {
 }
 
 article ul {
+  display: flex;
   justify-content: center;
   gap: 1em;
   margin: .6em 0;
   padding: 0;
+  font-size: 1.2em;
 }
 
 .about-me {
   display: flex;
   align-items: stretch;
   gap: 2em;
+  min-height: 450px;
 }
 
 .about-me__info {
   flex: 2;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   gap: 1.3em;
   padding: 2em;
 }

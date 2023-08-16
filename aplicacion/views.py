@@ -4,7 +4,7 @@ from .models import *
 from .forms import *
 
 # Auth
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -293,18 +293,18 @@ def login_request(request):
             else:
                 return render(
                     request,
-                    "aplicacion/login.html",
+                    "aplicacion/sesion/login.html",
                     {"error": "Usuario o contraseña incorrectos", "form": form},
                 )
         else:
             return render(
                 request,
-                "aplicacion/login.html",
+                "aplicacion/sesion/login.html",
                 {"error": "Usuario o contraseña incorrectos", "form": form},
             )
 
     form = AuthenticationForm()
-    return render(request, "aplicacion/login.html", {"form": form})
+    return render(request, "aplicacion/sesion/login.html", {"form": form})
 
 
 def register(request):
@@ -313,11 +313,13 @@ def register(request):
         if form.is_valid():
             user = form.cleaned_data.get("username")
             form.save()
-            return render(request, "aplicacion/usuario-creado.html", {"user": user})
+            return render(
+                request, "aplicacion/sesion/usuario-creado.html", {"user": user}
+            )
     else:
         form = CustomUserCreationForm()
 
-    return render(request, "aplicacion/registro.html", {"form": form})
+    return render(request, "aplicacion/sesion/registro.html", {"form": form})
 
 
 @login_required
@@ -330,13 +332,8 @@ def edit_profile(request):
             usuario.first_name = informacion["first_name"]
             usuario.last_name = informacion["last_name"]
             usuario.email = informacion["email"]
-            usuario.password1 = informacion["password1"]
-            usuario.password2 = informacion["password2"]
-            if usuario.password1 == usuario.password2:
-                usuario.set_password(usuario.password1)
-                update_session_auth_hash(request, usuario)
-                usuario.save()
-                return render(request, "aplicacion/confirmacion-guardado.html")
+            usuario.save()
+            return render(request, "aplicacion/confirmacion-guardado.html")
     else:
         form = UserEditForm(
             initial={
@@ -346,7 +343,19 @@ def edit_profile(request):
             }
         )
 
-    return render(request, "aplicacion/editar-perfil.html", {"form": form})
+    return render(request, "aplicacion/sesion/editar-perfil.html", {"form": form})
+
+@login_required
+def change_pass(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return render(request, "aplicacion/confirmacion-guardado.html")
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, "aplicacion/sesion/editar-perfil.html", {"form": form})
 
 
 @login_required
@@ -368,4 +377,4 @@ def add_avatar(request):
             return render(request, "aplicacion/confirmacion-guardado.html")
     else:
         form = AvatarForm()
-    return render(request, "aplicacion/edit-avatar.html", {"form": form})
+    return render(request, "aplicacion/sesion/edit-avatar.html", {"form": form})
