@@ -127,6 +127,10 @@ button {
   margin-left: .5em;
 }
 
+table {
+  margin-bottom: 5em;
+}
+
 table a:hover {
   text-decoration: none;
 }

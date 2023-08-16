@@ -278,7 +278,7 @@ class ProveedorDetail(LoginRequiredMixin, DetailView):
 
 
 # Login
-def login_request(request):
+def logueo(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -315,9 +315,9 @@ def login_request(request):
     return render(request, "aplicacion/sesion/login.html", {"form": form})
 
 
-def register(request):
+def registro(request):
     if request.method == "POST":
-        form = CustomUserCreationForm(request.POST)
+        form = UsuarioCreacionForm(request.POST)
         if form.is_valid():
             user = form.cleaned_data.get("username")
             form.save()
@@ -325,16 +325,16 @@ def register(request):
                 request, "aplicacion/sesion/usuario-creado.html", {"user": user}
             )
     else:
-        form = CustomUserCreationForm()
+        form = UsuarioCreacionForm()
 
     return render(request, "aplicacion/sesion/registro.html", {"form": form})
 
 
 @login_required
-def edit_profile(request):
+def edicion_perfil(request):
     usuario = request.user
     if request.method == "POST":
-        form = UserEditForm(request.POST)
+        form = UsuarioEdicionForm(request.POST)
         if form.is_valid():
             informacion = form.cleaned_data
             usuario.first_name = informacion["first_name"]
@@ -343,7 +343,7 @@ def edit_profile(request):
             usuario.save()
             return render(request, "aplicacion/confirmacion-guardado.html")
     else:
-        form = UserEditForm(
+        form = UsuarioEdicionForm(
             initial={
                 "first_name": usuario.first_name,
                 "last_name": usuario.last_name,
@@ -355,7 +355,7 @@ def edit_profile(request):
 
 
 @login_required
-def change_pass(request):
+def cambio_pass(request):
     if request.method == "POST":
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
@@ -368,7 +368,7 @@ def change_pass(request):
 
 
 @login_required
-def add_avatar(request):
+def modificacion_avatar(request):
     if request.method == "POST":
         form = AvatarForm(request.POST, request.FILES)
         if form.is_valid():
