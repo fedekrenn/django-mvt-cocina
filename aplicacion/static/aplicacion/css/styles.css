@@ -161,6 +161,11 @@ th {
   text-align: center;
 }
 
+.helptext {
+  font-size: .8em;
+  color: #7c7511;
+}
+
 
 #show-dialog {
   display: block;

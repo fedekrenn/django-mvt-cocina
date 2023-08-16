@@ -20,11 +20,7 @@
         {% if user.is_authenticated %}
         <li>
           <a href="{% url 'editar_perfil' %}" title="Editar perfil" class="avatar-container">
-            {% if request.session.avatar %}
             <img src="{{ request.session.avatar }}" class="avatar rounded" />
-            {% else %}
-            <i class="fas fa-user-circle"></i>
-            {% endif %}
             {{ user.username }}
           </a>
         </li>
