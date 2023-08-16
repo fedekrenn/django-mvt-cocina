@@ -288,6 +288,14 @@ def login_request(request):
             user = authenticate(username=usuario, password=password)
             if user is not None:
                 login(request, user)
+
+                try:
+                    avatar = Avatar.objects.get(user=request.user.id).imagen.url
+                except:
+                    avatar = "https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg"
+                finally:
+                    request.session["avatar"] = avatar
+
                 return redirect("inicio")
 
             else:
@@ -345,6 +353,7 @@ def edit_profile(request):
 
     return render(request, "aplicacion/sesion/editar-perfil.html", {"form": form})
 
+
 @login_required
 def change_pass(request):
     if request.method == "POST":
@@ -364,13 +373,18 @@ def add_avatar(request):
         form = AvatarForm(request.POST, request.FILES)
         if form.is_valid():
             u = User.objects.get(username=request.user)
-            anterior_avatar = Avatar.objects.filter(user=u)
-            if len(anterior_avatar) > 0:
-                anterior_avatar[0].delete()
+            # _________________ Esto es para borrar el avatar anterior
+            avatarViejo = Avatar.objects.filter(user=u)
+            if (
+                len(avatarViejo) > 0
+            ):  # Si esto es verdad quiere decir que hay un Avatar previo
+                avatarViejo[0].delete()
 
+            # _________________ Grabo avatar nuevo
             avatar = Avatar(user=u, imagen=form.cleaned_data["imagen"])
             avatar.save()
 
+            # _________________ Almacenar en session la url del avatar para mostrarla en base
             imagen = Avatar.objects.get(user=request.user.id).imagen.url
             request.session["avatar"] = imagen
 
