@@ -15,12 +15,11 @@
 
 <body>
   <header>
-    <nav>
+    <nav class="sesion">
       <ul>
         {% if user.is_authenticated %}
-        <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt" title="Logout"></i> </a></li>
         <li>
-          <a href="{% url 'editar_perfil' %}" title="Editar perfil">
+          <a href="{% url 'editar_perfil' %}" title="Editar perfil" class="avatar-container">
             {% if request.session.avatar %}
             <img src="{{ request.session.avatar }}" class="avatar rounded" />
             {% else %}
@@ -29,20 +28,22 @@
             {{ user.username }}
           </a>
         </li>
+        {% if user.is_staff %}
+        <li>
+          <a href="{% url 'admin:index' %}">
+            <i class="fas fa-user-shield" title="Acceso administrador"></i>
+          </a>
+        </li>
+        {% endif %}
+        <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt" title="Logout"></i> </a></li>
         {% else %}
         <li><a href="{% url 'login' %}">Login</a></li>
         <li><a href="{% url 'registro' %}">Registro</a></li>
         {% endif %}
-        {% if user.is_staff %}
-        <li><a href="{% url 'admin:index' %}">
-            <i class="fas fa-user-shield" title="Acceso administrador"></i>
-          </a></li>
-        {% endif %}
       </ul>
     </nav>
-    <nav>
+    <nav class="urls">
       <ul>
-
         <li><a href="{% url 'inicio' %}">Inicio</a></li>
         {% if user.is_authenticated %}
         <li><a href="{% url 'recetas' %}">Recetas</a></li>
