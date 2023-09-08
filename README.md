@@ -30,7 +30,7 @@ Para el CRUD, se eligió usar vistas basadas en clases para UpdateView, DeleteVi
 
 1 - Para instalar el proyecto se debe clonar el repositorio 
 ```
-git clone https://github.com/fedekrenn/Krenn-Federico-Comision-43865.git
+git clone https://github.com/fedekrenn/django-mvt-cocina.git
 ```
 2 - Instalar Pillow ya que necesitamos manipular imágenes
 ```
