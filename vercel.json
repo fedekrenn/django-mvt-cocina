@@ -1,5 +1,5 @@
 {
-  "buils": [
+  "builds": [
     {
       "src": "proyecto-final/wsgi.py",
       "use": "@vercel/python",
