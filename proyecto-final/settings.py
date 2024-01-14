@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-!_gze0op=dn7hc!55f=gv1^l8%wcg)+g1x*zibdg@qb_(0dgcq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = [".vercel.app", "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -77,8 +77,12 @@ WSGI_APPLICATION = "proyecto-final.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "bifosputkainv6kj0ro3",
+        "USER": "uelrvcbgeqqjbfxu",
+        "PASSWORD": "vkrKG0flCt5XzZbUQzZS",
+        "HOST": "bifosputkainv6kj0ro3-mysql.services.clever-cloud.com",
+        "PORT": "3306",
     }
 }
 
