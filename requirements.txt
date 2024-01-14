@@ -34,7 +34,6 @@ pycodestyle==2.10.0
 pydocstyle==6.3.0
 Pygments==2.15.0
 python-dateutil==2.8.2
-pywin32==306
 pyzmq==25.0.2
 six==1.16.0
 snowballstemmer==2.2.0
