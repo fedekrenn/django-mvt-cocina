@@ -1,111 +1,165 @@
-# 👨‍🍳 Recetas de cocina
+# 👨‍🍳 Recetas de cocina — Django (MVT)
 
-Web desarrollada en Django con patron MVT.
+Proyecto de ejemplo para gestionar recetas, cocineros, restaurantes y proveedores. Incluye registro/login de usuarios, CRUD para los modelos principales y un buscador de recetas.
 
-## 📄 Objetivo funcional:
+## Contenido
 
-Webapp permite administrar un modelo de negocio de restaurante y allí poder consultar, crear, modificar y eliminar recetas de cocina, cociner@s, restaurantes (de por ejemplo una red de partners) y proveedores. Cuenta con un registro para que los usuarios puedan hacer CRUD de los modelos. Sin loguearse sólo es posible ver y buscar recetas, eso a fin de que un usuario sin permisos sólo vea las recetas que se ofrecen, pero la parte del negocio propiamiente dicha (como proveedores) sea sólo para usuarios autenticados. Existe un superadmin que a la vez tiene acceso a panel de control (User: admin, Pass: admin). Los conceptos que se tratan son:
+- Resumen del proyecto
+- Requisitos
+- Instalación (entorno virtual y dependencias)
+- Configuración de la base de datos y migraciones
+- Uso (ejecución local)
+- Solución de problemas comunes
+- Contribuir
 
-- Herencia HTML
-- Clases en modelos
-- Formularios de ingreso de datos en todas las clases
-- CRUD completo
-- Relaciones entre clases
-- Formulario de búsqueda de recetas por su nombre
-- Vistas basadas en Clases
+---
 
-## Particularidades
+## Resumen
 
-Para el CRUD, se eligió usar vistas basadas en clases para UpdateView, DeleteView y DetailView, no así para el ListView y CreateView ya que se usaron funciones para poder hacer la carga del modelo instanciado mediante un dialog emergente, por lo que se personalizó mendiante una función.
+Esta web permite:
 
-## Modelos
+- Visualizar y buscar recetas (público)
+- Registro y login de usuarios
+- CRUD sobre Recetas, Cocineros, Restaurantes y Proveedores (usuarios autenticados)
+- Gestión de avatar por usuario
 
-- Receta
-- Cocinero
-- Restaurante
-- Proveedor
-- Avatar (para almacenar la imagen de usuario)
+Modelos principales: `Receta`, `Cocinero`, `Restaurante`, `Proveedor`, `Avatar`.
 
-## 🔧 Instalación
+---
 
-1 - Para instalar el proyecto se debe clonar el repositorio 
-```
+## Requisitos
+
+- Python 3.11–3.13 (recomendado: 3.12 para máxima compatibilidad)
+- MySQL o SQLite (para desarrollo rápido) — ver sección de configuración
+- Git
+- pip
+
+Nota: Si usas Python 3.13 puedes necesitar versiones actualizadas de paquetes (Pillow, pyzmq, etc.). El `requirements.txt` del proyecto ya contiene versiones compatibles probadas con Python 3.13.
+
+---
+
+## Instalación (desarrollo)
+
+1. Clonar el repositorio:
+
+```bash
 git clone https://github.com/fedekrenn/django-mvt-cocina.git
-```
-2 - Instalar Pillow ya que necesitamos manipular imágenes
-```
-pip install Pillow
+cd django-mvt-cocina
 ```
 
-## Uso
+2. Crear y activar un entorno virtual
 
-1 - Para utilizar el proyecto se debe ejecutar el siguiente comando en la carpeta del proyecto
+```bash
+python -m venv env_cocinando
 ```
+
+3. Activar el entorno virtual:
+
+```bash
+env_cocinando\Scripts\Activate
+```
+
+4. Actualizar pip y herramientas de construcción (importante en Windows):
+
+```bash
+python -m pip install --upgrade pip setuptools wheel
+```
+
+5. Instalar dependencias:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Migraciones y superusuario
+
+Después de configurar la DB, aplica migraciones y crea un superusuario:
+
+```bash
+python manage.py migrate
+python manage.py createsuperuser
+```
+
+---
+
+## Ejecutar en desarrollo
+
+```bash
 python manage.py runserver
+# Visitar http://127.0.0.1:8000/
 ```
 
-2 - Luego se debe ingresar al localhost en el puerto 8000
-<br><br>
-`http://127.0.0.1:8000/` o `http://localhost:8000/`
+Para cargar archivos estáticos (cuando sea necesario):
+
+```bash
+python manage.py collectstatic
+```
+
+---
+
+## Funcionalidades clave
+
+- Buscar recetas desde la página principal (formulario en `aplicacion/templates/aplicacion/index.html`).
+- CRUD completo para modelos principales (requiere autenticación).
+- Gestión de avatar por usuario.
+
+## Capturas / Videos
+
+Primera pantalla (lista de recetas):
+
+![Lista de recetas](https://github.com/fedekrenn/Krenn-Federico-Comision-43865/assets/90353038/725bccd0-a1b7-4242-ae33-9da9b1652081)
+
+Pantalla de usuario / perfil:
+
+![Perfil y nav](https://github.com/fedekrenn/Krenn-Federico-Comision-43865/assets/90353038/b4573eb1-45b1-49a8-adf6-f7fbde1f08ca)
+
+Gestión de avatar en el perfil del usuario:
+
+![Avatar usuario](https://github.com/fedekrenn/Krenn-Federico-Comision-43865/assets/90353038/114fd26f-18fa-4c13-af4e-c718d5ce8205)
+
+Modal de carga / registro de elementos (ej. recetas):
+
+![Modal de carga](https://github.com/fedekrenn/Krenn-Federico-Comision-43865/assets/90353038/41a82d4c-0249-4a67-8643-0b583dac0fd4)
+
+Acciones (detalle / editar / eliminar) en las tablas:
+
+![Acciones en tabla](https://github.com/fedekrenn/Krenn-Federico-Comision-43865/assets/90353038/c3a99878-447d-40ca-9dde-ff9c4c5b5dd0)
+
+Acceso al panel de administrador (superuser):
+
+![Panel admin](https://github.com/fedekrenn/Krenn-Federico-Comision-43865/assets/90353038/3007e6b4-4b11-4147-be14-34f311cb716d)
+
+---
+
+## Pruebas y verificación rápida
+
+Actualmente el proyecto no incluye una suite extensa de tests automatizados. Para una comprobación manual básica:
+
+1. Ejecuta `python manage.py migrate`.
+2. Crea un superuser: `python manage.py createsuperuser`.
+3. Levanta el servidor y prueba las rutas principales.
+
+---
+
+## Contribuir
+
+1. Haz fork del repositorio.
+2. Crea una rama para tu feature/bugfix: `git checkout -b feature/nombre`.
+3. Haz commits claros y push.
+4. Abre un Pull Request describiendo el cambio.
+
+Antes de aportar, prueba localmente las migraciones y las vistas que modifiques.
+
+---
 
 <br>
-
-3 - La pantalla principal de la web muestra la bienvenida, el listado de recetas en formato card y un input de búsqueda, este último permite buscar recetas por su nombre. Si se ingresa un nombre de receta que no existe, se mostrará un mensaje de feedback. Al hacer click en una receta se navegará a su detalle:
-
-<br>
-
-![primero](https://github.com/fedekrenn/Krenn-Federico-Comision-43865/assets/90353038/725bccd0-a1b7-4242-ae33-9da9b1652081)
-
-
-<br><br>
-
-4 - El usuario cuenta con un nav en la parte superior donde puede logearse o bien crear la cuenta en caso que no posea una, al acceder se habilitan las demás secciones. También se puede ingresar a su panel clickeando el avatar para modificar la información.
-
-<br>
-
-![segundo](https://github.com/fedekrenn/Krenn-Federico-Comision-43865/assets/90353038/b4573eb1-45b1-49a8-adf6-f7fbde1f08ca)
-
-<br><br>
-
-5 - Dentro de la modificación de los datos el usuario puede agregar/cambiar su avatar y también el password.
-
-<br>
-
-![avatar](https://github.com/fedekrenn/Krenn-Federico-Comision-43865/assets/90353038/114fd26f-18fa-4c13-af4e-c718d5ce8205)
-
-<br><br>
-
-6 - En cada una de las secciones que representan Clases se podrá consultar una tabla con los registros cargados en la base de datos y clickeando el botón de que permite agregar un nuevo elemento se abrirá un modal para la carga de todos los datos, de completar todo correctamente se redirigirá a una page de confirmación y se podrá ver la nueva entrada.
-
-<br>
-
-![tercero](https://github.com/fedekrenn/Krenn-Federico-Comision-43865/assets/90353038/41a82d4c-0249-4a67-8643-0b583dac0fd4)
-
-<br><br>
-
-7 - En la última columna de la tabla de cada modelo encontramos "Acciones", donde hay 3 botones que nos permiten ver el detalle, modificar el elemento y eliminarlo.
-
-<br>
-
-![cuarto](https://github.com/fedekrenn/Krenn-Federico-Comision-43865/assets/90353038/c3a99878-447d-40ca-9dde-ff9c4c5b5dd0)
-
-
-<br><br>
-
-8 - Existe un superuser con user "admin" y pass "admin" que al acceder podrá visualizar un panel de administrador en el nav superior (usuarios comunes creados desde el registro web no visualizan esta opción), clickeando allí se redirigirá al panel de Django.
-
-<br>
-
-![quinto](https://github.com/fedekrenn/Krenn-Federico-Comision-43865/assets/90353038/3007e6b4-4b11-4147-be14-34f311cb716d)
-
-
-<br>
-
-
 
 ## 🙋‍♂️ Hola, Soy Federico Krenn
-:nerd_face: Desarrollador web
+
+:nerd_face: Software Developer
 <br>
-👨‍🎓 Realizando la Tecnicatura en Desarrollo Web en ISPC y Tecnicatura en Software Libre en la UNL
+👨‍🎓 Técnico Superior en Desarrollo Web y aplicaciones. También me encuentro realizando la Tecnicatura en Software Libre en la UNL.
 <br>
 📫 Conectemos en Linkedin: https://www.linkedin.com/in/fkrenn/
