@@ -6,6 +6,16 @@ body {
   margin: 0;
   padding: 0;
   max-width: 100%;
+  overflow-x: hidden;
+}
+
+a, button, input, select, textarea {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 nav.urls {
@@ -129,6 +139,15 @@ button {
 
 table {
   margin-bottom: 5em;
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 2em auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 table a:hover {
@@ -431,4 +450,487 @@ article ul {
   font-weight: 1.2em;
   text-decoration: underline;
   margin-right: 5px;
+}
+
+/* ============================================
+   MENÚ HAMBURGUESA
+   ============================================ */
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5em;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+.hamburger:hover {
+  transform: scale(1.1);
+}
+
+.hamburger span {
+  display: block;
+  width: 30px;
+  height: 3px;
+  background-color: #1a242f;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span {
+  background-color: #ffffff;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Overlay para el menú móvil */
+.menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+
+.menu-overlay.active {
+  display: block;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - MEDIA QUERIES
+   ============================================ */
+
+/* Tablets y pantallas medianas (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+  nav.urls {
+    min-height: 30vh;
+    position: relative;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .urls ul {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    flex-direction: column;
+    background-color: rgba(26, 36, 47, 0.98);
+    width: 70%;
+    max-width: 350px;
+    height: 100vh;
+    padding: 4em 2em 2em 2em;
+    gap: 1.8em;
+    font-size: 1.4em;
+    transition: left 0.3s ease;
+    z-index: 999;
+    overflow-y: auto;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .urls ul.active {
+    left: 0;
+  }
+
+  .urls ul li {
+    width: 100%;
+    text-align: center;
+    padding: 0.6em 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .card {
+    width: 280px;
+  }
+
+  article {
+    width: 85%;
+  }
+
+  .about-me {
+    flex-direction: column;
+  }
+
+  .about-me__img {
+    order: -1;
+  }
+
+  .profile-img {
+    max-width: 300px;
+    height: auto;
+  }
+
+  .description-section article {
+    width: 95%;
+    flex-direction: column;
+  }
+
+  .img-desc {
+    max-width: 100%;
+    height: auto;
+  }
+
+  table {
+    font-size: 0.9em;
+  }
+
+  .food-img {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Móviles y pantallas pequeñas (hasta 768px) */
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  /* Navegación superior */
+  nav.sesion ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5em;
+    padding: 0.5em;
+  }
+
+  nav.sesion i {
+    font-size: 1.5em;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .avatar-container {
+    font-size: 0.8em;
+  }
+
+  /* Navegación de URLs - Menú hamburguesa */
+  nav.urls {
+    min-height: auto;
+    padding: 1em 0;
+    position: relative;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .urls ul {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    flex-direction: column;
+    background-color: rgba(26, 36, 47, 0.98);
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    padding: 4em 2em 2em 2em;
+    gap: 1.5em;
+    font-size: 1.3em;
+    transition: left 0.3s ease;
+    z-index: 999;
+    overflow-y: auto;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .urls ul.active {
+    left: 0;
+  }
+
+  .urls ul li {
+    width: 100%;
+    text-align: center;
+    padding: 0.5em 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  header h1 {
+    font-size: 1.8em;
+    padding: 0 1em;
+    margin: 1em 0;
+  }
+
+  /* Cards */
+  .card-container {
+    padding: 1em;
+    gap: 1.5em;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  /* Formularios */
+  .search-form {
+    flex-direction: column;
+    padding: 1em;
+  }
+
+  .search-form input,
+  .search-form button {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  form {
+    width: 100%;
+    padding: 1em;
+  }
+
+  .input-form {
+    width: 100%;
+    margin: 1em 0;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  /* Botones */
+  .btn {
+    padding: 0.8em 1.5em;
+    font-size: 0.9em;
+  }
+
+  .inline {
+    flex-direction: column;
+    gap: 0.5em;
+    width: 100%;
+  }
+
+  .inline button {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  /* Tablas - Scroll horizontal con mejor presentación */
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 2em;
+  }
+
+  table {
+    display: table;
+    width: 100%;
+    min-width: 600px;
+    font-size: 0.85em;
+    margin-bottom: 2em;
+  }
+
+  thead {
+    background-color: rgba(49, 65, 78, 0.9);
+  }
+
+  tbody tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  th, td {
+    padding: 0.8em 0.5em;
+    min-width: 80px;
+  }
+
+  th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  td:last-child {
+    min-width: 120px;
+  }
+
+  .food-img {
+    width: 60px;
+    height: 60px;
+  }
+
+  /* Artículos y secciones */
+  article {
+    width: 95%;
+    margin: 1em auto;
+    padding: 1em;
+  }
+
+  .description-section article {
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em;
+  }
+
+  .description-section h2 {
+    font-size: 2em;
+    margin: 0.5em 0;
+  }
+
+  .description-section .info {
+    margin: 1em 0;
+  }
+
+  .description-section .info p {
+    font-size: 1em;
+    text-align: center;
+  }
+
+  /* About me section */
+  .about-me {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .about-me__info {
+    padding: 1em;
+  }
+
+  .about-card img {
+    width: 70px;
+  }
+
+  .profile-img {
+    max-width: 250px;
+  }
+
+  article ul {
+    flex-direction: column;
+    gap: 0.5em;
+    font-size: 1.1em;
+  }
+
+  /* Model detail */
+  .model-detail ul {
+    width: 100%;
+    max-width: 350px;
+    padding: 1em;
+  }
+
+  /* Dialog */
+  dialog {
+    width: 90%;
+    max-width: 400px;
+  }
+
+  #show-dialog {
+    width: 90%;
+    max-width: 250px;
+  }
+}
+
+/* Móviles muy pequeños (hasta 480px) */
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 13px;
+  }
+
+  header h1 {
+    font-size: 1.5em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    margin: 1em 0;
+  }
+
+  .urls ul {
+    font-size: 1.1em;
+    padding: 3em 1.5em 2em 1.5em;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .card-header img {
+    min-height: 180px;
+  }
+
+  .h3-container h3 {
+    font-size: 0.95em;
+  }
+
+  .description-section h2 {
+    font-size: 1.7em;
+  }
+
+  table {
+    font-size: 0.75em;
+  }
+
+  th {
+    font-size: 1.2em;
+  }
+
+  .food-img {
+    width: 50px;
+    height: 50px;
+  }
+
+  td a {
+    margin: 0 0.2em;
+  }
+
+  td i {
+    font-size: 0.9em;
+  }
+
+  .about-card img {
+    width: 60px;
+  }
+
+  .profile-img {
+    max-width: 200px;
+  }
+
+  .btn {
+    padding: 0.7em 1.2em;
+    font-size: 0.85em;
+  }
+
+  input, select, textarea, button {
+    font-size: 14px;
+  }
+}
+
+/* Pantallas grandes (1200px y más) */
+@media screen and (min-width: 1200px) {
+  .card-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  article {
+    max-width: 1200px;
+  }
+
+  .description-section article {
+    max-width: 1300px;
+  }
 }
