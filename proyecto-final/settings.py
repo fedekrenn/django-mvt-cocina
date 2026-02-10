@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,11 +21,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
+# Load environment variables from a .env file (if present)
+load_dotenv(os.path.join(BASE_DIR, ".env"))
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-!_gze0op=dn7hc!55f=gv1^l8%wcg)+g1x*zibdg@qb_(0dgcq"
+SECRET_KEY = os.environ.get(
+    "DJANGO_SECRET_KEY",
+    "django-insecure-!_gze0op=dn7hc!55f=gv1^l8%wcg)+g1x*zibdg@qb_(0dgcq",
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() in ("1", "true", "yes")
 
 ALLOWED_HOSTS = [".vercel.app", "localhost", "127.0.0.1"]
 
@@ -77,12 +84,15 @@ WSGI_APPLICATION = "proyecto-final.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "mysql.connector.django",
-        "NAME": "bvrwss7u4fog81r0hhbj",
-        "USER": "uelrvcbgeqqjbfxu",
-        "PASSWORD": "vkrKG0flCt5XzZbUQzZS",
-        "HOST": "bvrwss7u4fog81r0hhbj-mysql.services.clever-cloud.com",
-        "PORT": "3306",
+        "ENGINE": os.environ.get("DJANGO_DB_ENGINE", "mysql.connector.django"),
+        "NAME": os.environ.get("DJANGO_DB_NAME", "bvrwss7u4fog81r0hhbj"),
+        "USER": os.environ.get("DJANGO_DB_USER", "uelrvcbgeqqjbfxu"),
+        "PASSWORD": os.environ.get("DJANGO_DB_PASSWORD", "vkrKG0flCt5XzZbUQzZS"),
+        "HOST": os.environ.get(
+            "DJANGO_DB_HOST",
+            "bvrwss7u4fog81r0hhbj-mysql.services.clever-cloud.com",
+        ),
+        "PORT": os.environ.get("DJANGO_DB_PORT", "3306"),
     }
 }
 

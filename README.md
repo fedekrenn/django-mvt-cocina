@@ -99,6 +99,37 @@ python manage.py collectstatic
 
 ---
 
+## Variables de entorno (.env)
+
+Para mantener fuera del repositorio la información sensible (credenciales de BD, secret key, debug), puedes usar un archivo `.env` en la raíz del proyecto.
+
+1. Crea el archivo copiando el ejemplo:
+
+```bash
+cp .env.example .env
+# o en Windows PowerShell
+Copy-Item .env.example .env
+```
+
+2. Edita `.env` y reemplaza los valores por tus credenciales.
+
+3. `proyecto-final/settings.py` ya carga variables desde `.env` mediante `python-dotenv`.
+
+Variables disponibles (ejemplo en `.env.example`):
+
+- `DJANGO_SECRET_KEY` — clave secreta de Django
+- `DJANGO_DEBUG` — `True`/`False` (controla DEBUG)
+- `DJANGO_DB_ENGINE` — engine DB (`django.db.backends.sqlite3` o `mysql.connector.django`)
+- `DJANGO_DB_NAME`
+- `DJANGO_DB_USER`
+- `DJANGO_DB_PASSWORD`
+- `DJANGO_DB_HOST`
+- `DJANGO_DB_PORT`
+
+Después de crear `.env`, procede con `python manage.py migrate` normalmente.
+
+---
+
 ## Funcionalidades clave
 
 - Buscar recetas desde la página principal (formulario en `aplicacion/templates/aplicacion/index.html`).
