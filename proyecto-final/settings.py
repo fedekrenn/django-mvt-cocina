@@ -78,10 +78,10 @@ WSGI_APPLICATION = "proyecto-final.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "mysql.connector.django",
-        "NAME": "bifosputkainv6kj0ro3",
+        "NAME": "bvrwss7u4fog81r0hhbj",
         "USER": "uelrvcbgeqqjbfxu",
         "PASSWORD": "vkrKG0flCt5XzZbUQzZS",
-        "HOST": "bifosputkainv6kj0ro3-mysql.services.clever-cloud.com",
+        "HOST": "bvrwss7u4fog81r0hhbj-mysql.services.clever-cloud.com",
         "PORT": "3306",
     }
 }
