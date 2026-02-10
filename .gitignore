@@ -3,3 +3,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.so
+
+# Entorno local con credenciales
+.env
