@@ -17,7 +17,7 @@ from django.views.generic.detail import DetailView
 def index(request):
     if request.method == "POST":
         nombre = request.POST["nombre"]
-        recetas = Receta.objects.filter(nombre__contains=nombre)
+        recetas = Receta.objects.filter(nombre__icontains=nombre)
         ctx = {"recetas": recetas}
 
         if not recetas:
