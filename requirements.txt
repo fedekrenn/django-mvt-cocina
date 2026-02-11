@@ -39,7 +39,7 @@ six==1.16.0
 snowballstemmer==2.2.0
 sqlparse==0.5.3
 stack-data==0.6.3
-tornado==6.4.2
+tornado==6.5
 traitlets==5.14.3
 tzdata==2024.2
 virtualenv==20.36.1
