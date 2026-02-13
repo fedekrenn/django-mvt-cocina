@@ -84,7 +84,7 @@ WSGI_APPLICATION = "proyecto-final.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": os.environ.get("DJANGO_DB_ENGINE", "mysql.connector.django"),
+        "ENGINE": os.environ.get("DJANGO_DB_ENGINE", "django.db.backends.mysql"),
         "NAME": os.environ.get("DJANGO_DB_NAME", "bvrwss7u4fog81r0hhbj"),
         "USER": os.environ.get("DJANGO_DB_USER", "uelrvcbgeqqjbfxu"),
         "PASSWORD": os.environ.get("DJANGO_DB_PASSWORD", "vkrKG0flCt5XzZbUQzZS"),
