@@ -31,7 +31,7 @@ psutil==6.1.1
 pure-eval==0.2.2
 pycodestyle==2.12.1
 pydocstyle==6.3.0
-Pygments==2.18.0
+Pygments==2.20.0
 python-dateutil==2.9.0
 pyzmq==26.2.0
 six==1.16.0
