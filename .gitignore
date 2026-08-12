@@ -14,3 +14,6 @@ venv/
 
 # Estaticos generados por collectstatic (Vercel los genera en cada build)
 staticfiles_build/
+
+# Notas personales locales
+TO-DO.txt
