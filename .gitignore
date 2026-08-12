@@ -11,3 +11,6 @@ __pycache__/
 venv/
 .vercel
 .env*
+
+# Estaticos generados por collectstatic (Vercel los genera en cada build)
+staticfiles_build/
