@@ -1,15 +1,8 @@
 {
-  "builds": [
-    {
-      "src": "proyecto-final/wsgi.py",
-      "use": "@vercel/python",
-      "config": { "maxLambdaSize": "15mb", "runtime": "python3.10" }
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "proyecto-final/wsgi.py": {
+      "maxDuration": 30
     }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "proyecto-final/wsgi.py"
-    }
-  ]
+  }
 }
