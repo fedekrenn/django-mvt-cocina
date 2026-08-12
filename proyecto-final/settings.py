@@ -25,10 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get(
-    "DJANGO_SECRET_KEY",
-    "***REMOVED-SECRET-KEY***",
-)
+SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() in ("1", "true", "yes")
@@ -85,13 +82,10 @@ WSGI_APPLICATION = "proyecto-final.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": os.environ.get("DJANGO_DB_ENGINE", "django.db.backends.mysql"),
-        "NAME": os.environ.get("DJANGO_DB_NAME", "***REMOVED-DB-NAME***"),
-        "USER": os.environ.get("DJANGO_DB_USER", "***REMOVED-DB-USER***"),
-        "PASSWORD": os.environ.get("DJANGO_DB_PASSWORD", "***REMOVED-DB-PASSWORD***"),
-        "HOST": os.environ.get(
-            "DJANGO_DB_HOST",
-            "***REMOVED-DB-HOST***",
-        ),
+        "NAME": os.environ["DJANGO_DB_NAME"],
+        "USER": os.environ["DJANGO_DB_USER"],
+        "PASSWORD": os.environ["DJANGO_DB_PASSWORD"],
+        "HOST": os.environ["DJANGO_DB_HOST"],
         "PORT": os.environ.get("DJANGO_DB_PORT", "3306"),
     }
 }
