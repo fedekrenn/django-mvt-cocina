@@ -113,7 +113,7 @@ Copy-Item .env.example .env
 
 2. Edita `.env` y reemplaza los valores por tus credenciales.
 
-3. `proyecto-final/settings.py` ya carga variables desde `.env` mediante `python-dotenv`.
+3. `proyecto_final/settings.py` ya carga variables desde `.env` mediante `python-dotenv`.
 
 Variables disponibles (ejemplo en `.env.example`):
 
