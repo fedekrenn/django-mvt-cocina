@@ -33,12 +33,14 @@
           <a href="{% url 'detail_proveedor' proveedor.id %}">
             <i class="fa-regular fa-eye" style="color: #ffffff;" title="Ver proveedor"></i>
           </a>
+          {% if user.is_superuser or proveedor.propietario == user %}
           <a href="{% url 'edit_proveedor' proveedor.id %}">
             <i class="fa-regular fa-edit" style="color: #ffffff;" title="Editar proveedor"></i>
           </a>
           <a href="{% url 'delete_proveedor' proveedor.id %}">
             <i class="fa-regular fa-trash-can" style="color: #ffffff;" title="Eliminar proveedor"></i>
           </a>
+          {% endif %}
         </td>
       </tr>
       {% endfor %}
