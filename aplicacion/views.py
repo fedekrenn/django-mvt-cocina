@@ -1,3 +1,5 @@
+from typing import TYPE_CHECKING
+
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from .models import *
@@ -11,11 +13,16 @@ from django.contrib.auth.decorators import login_required
 
 # Views
 from django.views.generic import UpdateView, DeleteView
-from django.views.generic.detail import DetailView
+from django.views.generic.detail import DetailView, SingleObjectMixin
+
+if TYPE_CHECKING:
+    from django.http import HttpRequest
 
 
-class OwnerRequiredQuerysetMixin:
+class OwnerRequiredQuerysetMixin(SingleObjectMixin):
     """Restricts UpdateView/DeleteView objects to their owner, except for superusers."""
+
+    request: "HttpRequest"
 
     def get_queryset(self):
         queryset = super().get_queryset()
