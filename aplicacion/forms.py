@@ -15,7 +15,7 @@ class RecetaForm(forms.Form):
     dificultad = forms.ChoiceField(
         label="Dificultad", choices=DIFICULTAD, required=True
     )
-    imagen_url = forms.CharField(
+    imagen_url = forms.URLField(
         label="URL de la imagen", max_length=200, required=True
     )
 
@@ -80,7 +80,7 @@ class ProveedorForm(forms.Form):
     )
     producto = forms.ChoiceField(label="Producto", choices=PRODUCTO, required=True)
     localidad = forms.CharField(label="Localidad", max_length=50, required=True)
-    sitio_web = forms.CharField(label="Sitio web", max_length=50, required=True)
+    sitio_web = forms.URLField(label="Sitio web", max_length=200, required=True)
     METODOS_PAGO = (
         ("Efectivo", "Efectivo"),
         ("Tarjeta", "Tarjeta"),

@@ -12,7 +12,7 @@ class Receta(models.Model):
         (3, "Difícil"),
     )
     dificultad = models.IntegerField(choices=DIFICULTAD)
-    imagen_url = models.CharField(max_length=2000)
+    imagen_url = models.URLField(max_length=2000)
 
     def __str__(self):
         return self.nombre
@@ -72,7 +72,7 @@ class Proveedor(models.Model):
     )
     producto = models.CharField(max_length=50, choices=PRODUCTO)
     localidad = models.CharField(max_length=50)
-    sitio_web = models.CharField(max_length=50)
+    sitio_web = models.URLField(max_length=200)
     METODOS_PAGO = (
         ("Efectivo", "Efectivo"),
         ("Tarjeta", "Tarjeta"),
