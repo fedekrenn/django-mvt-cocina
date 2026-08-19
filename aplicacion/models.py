@@ -13,6 +13,9 @@ class Receta(models.Model):
     )
     dificultad = models.IntegerField(choices=DIFICULTAD)
     imagen_url = models.URLField(max_length=2000)
+    propietario = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True
+    )
 
     def __str__(self):
         return self.nombre
@@ -26,6 +29,9 @@ class Cocinero(models.Model):
     anios_experiencia = models.IntegerField()
     email = models.CharField(max_length=50)
     telefono = models.CharField(max_length=50)
+    propietario = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True
+    )
 
     def __str__(self):
         return self.nombre + " " + self.apellido
@@ -53,6 +59,9 @@ class Restaurante(models.Model):
     calificacion = models.IntegerField(choices=CALIFICACIONES)
     capacidad = models.IntegerField()
     eventos = models.BooleanField()
+    propietario = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True
+    )
 
     def __str__(self):
         return self.nombre
@@ -81,6 +90,9 @@ class Proveedor(models.Model):
     )
     metodos_pago = models.CharField(max_length=50, choices=METODOS_PAGO)
     entrega_inmediata = models.BooleanField()
+    propietario = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True
+    )
 
     def __str__(self):
         return self.nombre + " - " + self.producto

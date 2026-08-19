@@ -14,6 +14,16 @@ from django.views.generic import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 
 
+class OwnerRequiredQuerysetMixin:
+    """Restricts UpdateView/DeleteView objects to their owner, except for superusers."""
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.request.user.is_superuser:
+            return queryset
+        return queryset.filter(propietario=self.request.user)
+
+
 def index(request):
     if request.method == "POST":
         nombre = request.POST["nombre"]
@@ -52,6 +62,7 @@ def recetas(request):
                 tiempo=tiempo,
                 dificultad=dificultad,
                 imagen_url=imagen_url,
+                propietario=request.user,
             )
 
             return render(request, "aplicacion/confirmacion-guardado.html")
@@ -63,7 +74,7 @@ def recetas(request):
     return render(request, "aplicacion/recetas/recetas.html", ctx)
 
 
-class RecetaDelete(LoginRequiredMixin, DeleteView):
+class RecetaDelete(LoginRequiredMixin, OwnerRequiredQuerysetMixin, DeleteView):
     model = Receta
     nombre = "la receta"
     url = "recetas"
@@ -71,7 +82,7 @@ class RecetaDelete(LoginRequiredMixin, DeleteView):
     template_name = "aplicacion/eliminar.html"
 
 
-class RecetaUpdate(LoginRequiredMixin, UpdateView):
+class RecetaUpdate(LoginRequiredMixin, OwnerRequiredQuerysetMixin, UpdateView):
     model = Receta
     nombre = "receta"
     url = "recetas"
@@ -107,6 +118,7 @@ def cocineros(request):
                 anios_experiencia=anios_experiencia,
                 email=email,
                 telefono=telefono,
+                propietario=request.user,
             )
 
             return render(request, "aplicacion/confirmacion-guardado.html")
@@ -117,7 +129,7 @@ def cocineros(request):
     return render(request, "aplicacion/cocineros/cocineros.html", ctx)
 
 
-class CocineroDelete(LoginRequiredMixin, DeleteView):
+class CocineroDelete(LoginRequiredMixin, OwnerRequiredQuerysetMixin, DeleteView):
     model = Cocinero
     nombre = "el cocinero"
     url = "cocineros"
@@ -125,7 +137,7 @@ class CocineroDelete(LoginRequiredMixin, DeleteView):
     template_name = "aplicacion/eliminar.html"
 
 
-class CocineroUpdate(LoginRequiredMixin, UpdateView):
+class CocineroUpdate(LoginRequiredMixin, OwnerRequiredQuerysetMixin, UpdateView):
     model = Cocinero
     nombre = "cocinero"
     url = "cocineros"
@@ -171,6 +183,7 @@ def restaurantes(request):
                 calificacion=calificacion,
                 capacidad=capacidad,
                 eventos=eventos,
+                propietario=request.user,
             )
 
             return render(request, "aplicacion/confirmacion-guardado.html")
@@ -181,7 +194,7 @@ def restaurantes(request):
     return render(request, "aplicacion/restaurantes/restaurante.html", ctx)
 
 
-class RestauranteDelete(LoginRequiredMixin, DeleteView):
+class RestauranteDelete(LoginRequiredMixin, OwnerRequiredQuerysetMixin, DeleteView):
     model = Restaurante
     nombre = "el restaurante"
     url = "restaurantes"
@@ -189,7 +202,7 @@ class RestauranteDelete(LoginRequiredMixin, DeleteView):
     template_name = "aplicacion/eliminar.html"
 
 
-class RestauranteUpdate(LoginRequiredMixin, UpdateView):
+class RestauranteUpdate(LoginRequiredMixin, OwnerRequiredQuerysetMixin, UpdateView):
     model = Restaurante
     nombre = "restaurant"
     url = "restaurantes"
@@ -236,6 +249,7 @@ def proveedores(request):
                 sitio_web=sitio_web,
                 metodos_pago=metodos_pago,
                 entrega_inmediata=entrega_inmediata,
+                propietario=request.user,
             )
 
             return render(request, "aplicacion/confirmacion-guardado.html")
@@ -246,7 +260,7 @@ def proveedores(request):
     return render(request, "aplicacion/proveedores/proveedores.html", ctx)
 
 
-class ProveedorDelete(LoginRequiredMixin, DeleteView):
+class ProveedorDelete(LoginRequiredMixin, OwnerRequiredQuerysetMixin, DeleteView):
     model = Proveedor
     nombre = "el proveedor"
     url = "proveedores"
@@ -254,7 +268,7 @@ class ProveedorDelete(LoginRequiredMixin, DeleteView):
     template_name = "aplicacion/eliminar.html"
 
 
-class ProveedorUpdate(LoginRequiredMixin, UpdateView):
+class ProveedorUpdate(LoginRequiredMixin, OwnerRequiredQuerysetMixin, UpdateView):
     model = Proveedor
     nombre = "proveedor"
     url = "proveedores"
