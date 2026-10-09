@@ -42,6 +42,6 @@ stack-data==0.6.3
 tornado==6.5.9
 traitlets==5.14.3
 tzdata==2024.2
-virtualenv==20.36.1
+virtualenv==21.7.13
 wcwidth==0.2.6
 python-dotenv==1.2.2
